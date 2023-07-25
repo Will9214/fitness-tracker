@@ -32,7 +32,7 @@ exports.signUp = function (req, res, next) {
     user.setPassword(password);
 
     user.save().then(() => {
-      res.json({ token: tokenForUser(user), user })
+      res.json({ userToken: tokenForUser(user), user })
     })
 
   });
@@ -42,14 +42,15 @@ exports.signIn = async function (req, res, next) {
   // User has already had their email and password auth'd
   // Just need to give them a token
   res.send({
-    token: tokenForUser(user),
+    username: req.body.username,
+    userToken: tokenForUser(req.user),
   })
 };
 
 exports.currentUser = function(req, res) {
   const user = {
     username: req.user.username,
-    token: tokenForUser(req.user),
+    userToken: tokenForUser(req.user),
     // activities
     // workouts
     // objectives

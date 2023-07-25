@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { signIn } from "../redux/auth/authActions";
 
 
 const userSchema = Yup.object().shape({
@@ -14,19 +16,25 @@ const userSchema = Yup.object().shape({
 
 const Login = () => {
 
+  const { loading, userInfo, error } = useSelector((state) => state.auth);
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
   });
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/home")
+    }
+  }, [navigate, userInfo]);
 
   const handleFormSubmit = (data) => {
-    // dispatchEvent(
-    //   signin(data, () => {
-    //     navigate("/home");
-    //   })
-    // );
+    dispatch(signIn(data
+    // , () => {navigate("/home")}
+    ));
   };
 
   const handleSignUpClick = () => {

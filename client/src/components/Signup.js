@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../redux/auth/authActions";
 
 const userSchema = Yup.object().shape({
   username: Yup.string().required(),
@@ -13,19 +15,34 @@ const userSchema = Yup.object().shape({
 
 const Signup = () => {
 
-  // const dispatch = useDispatch();
+  const { loading, userInfo, error, success } = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
   });
 
+  useEffect(() => {
+    // redirect user to login if signup is successful
+    if (success) navigate("/")
+    
+    // redirect authenticated user to home
+    if (userInfo) navigate("/home")
+  }, [navigate, userInfo, success]);
+
   const handleFormSubmit = (data) => {
-    // dispatch(
-    //   signup(data, () => {
-    //     navigate("/home");
-    //   })
-    // );
+    console.log(data, "handlesubmit")
+    dispatch(
+      signUp(data
+      //   ,
+      //    () => {
+      //   navigate("/home");
+      // }
+      )
+    );
   };
 
   const handleBackButton = () => {
