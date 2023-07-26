@@ -2,8 +2,8 @@ const User = require("../models/user");
 const Activity = require("../models/activity");
 
 exports.addActivity = async function(req, res, next) {
-
-  const { name, type, description, time, distance, sets, reps, userId } = req.body;
+  const { userId } = req.body;
+  const { name, type, description, time, distance, sets, reps } = req.body.data;
 
   User.findById(userId)
     .then((user) => {

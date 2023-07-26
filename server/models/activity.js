@@ -7,6 +7,7 @@ const ActivitySchema = new Schema({
   description: String,
   time: String,
   distance: Number,
+  weight: Number,
   sets: Number,
   reps: Number,
   iat: String,

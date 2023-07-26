@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import ShowActivities from "./ShowActivities";
+
 
 const Home = () => {
   const { userInfo } = useSelector((state) => state.auth)
@@ -16,11 +18,18 @@ const Home = () => {
         <Row>
           <Col>
             <h1 className="display-3">
-              Welcome {userInfo?.username}! You are successfully logged in!!
+              Welcome {userInfo.username}! You are successfully logged in!!
             </h1>
           </Col>
         </Row>
-      </Container>
+      </Container> 
+
+      <Col md={4} className="ps-5">
+
+        <ShowActivities />
+          
+      </Col>
+
     </HomeContainer>
   )
 }

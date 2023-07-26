@@ -48,7 +48,10 @@ exports.signIn = async function (req, res, next) {
 };
 
 exports.currentUser = function(req, res) {
+  console.log(req.user);
+  
   const user = {
+    userId: req.user._id,
     username: req.user.username,
     userToken: tokenForUser(req.user),
     // activities
