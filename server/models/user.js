@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const crypto = require("crypto");
 
-// Define Model
 const UserSchema = new Schema({
   username: { type: String, unique: true },
   activities: [{ type: Schema.Types.ObjectId, ref: "activities" }],
