@@ -17,11 +17,9 @@ export const signUp = createAsyncThunk(
         { username, password },
         config
       )
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message)
-      } else {
-        return rejectWithValue(error.message)
+    } catch (error) { 
+      if (error.response.data.error) {
+        return rejectWithValue(error.response.data.error)
       }
     }
   }
@@ -45,10 +43,8 @@ export const signIn = createAsyncThunk(
       return data
     } catch (error) {
       // return error message from API
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message)
-      } else {
-        return rejectWithValue(error.message)
+      if (error.response.status) {
+        return rejectWithValue(error.response.status)
       }
     }
   }

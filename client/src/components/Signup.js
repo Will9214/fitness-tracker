@@ -34,21 +34,28 @@ const Signup = () => {
   }, [navigate, userInfo, success]);
 
   const handleFormSubmit = (data) => {
-    console.log(data, "handlesubmit")
-    dispatch(
-      signUp(data
-      //   ,
-      //    () => {
-      //   navigate("/home");
-      // }
-      )
-    );
+    dispatch(signUp(data));
+  };
+
+  const renderSubmitError = () => {
+    if (error) {
+      return (
+        <ErrorContainer className="col-md-4 mb-2">
+          <ErrorMessage>{error}</ErrorMessage>
+        </ErrorContainer>      
+      )  
+    } else {
+      return null;
+    }
   };
 
   const handleBackButton = () => {
     navigate("/");
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   return (
     <SignUpContainer>
@@ -56,17 +63,19 @@ const Signup = () => {
         <h2 className="mb-3">Sign up below!!</h2>
         <h4 className="mb-4">Please fill out all the fields.</h4>
 
+        {renderSubmitError()}
+
         <Form onSubmit={handleSubmit(handleFormSubmit)} className="col-md-4">
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Create Username</Form.Label>
             <Form.Control type="text" placeholder="Username" name="username" {...register("username", { required: true })} />
-            {errors.username?.message}
+            <div style={{ color: "red" }}>{errors.username?.message ? "*" + capitalizeFirstLetter(errors.username?.message) : null}</div>
           </Form.Group>
         
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Create Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" {...register("password", { required: true })}/>
-            {errors.password?.message}
+            <div style={{ color: "red" }}>{errors.password?.message ? "*" + capitalizeFirstLetter(errors.password?.message) : null}</div>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3">
@@ -88,4 +97,15 @@ export default Signup;
 
 const SignUpContainer = styled.div`
   padding-top: 180px;
+`;
+
+const ErrorContainer = styled.div`
+  border: 1px solid #ff9b99;
+  border-radius: 5px;
+  background-color: #fad1d0;
+`;
+
+const ErrorMessage = styled.div`
+  padding: 10px;
+  color: #940128;
 `;

@@ -37,9 +37,25 @@ const Login = () => {
     ));
   };
 
+  const renderSubmitError = () => {
+    if (error === 401) {
+      return (
+        <ErrorContainer className="col-md-4 mb-2">
+          <ErrorMessage>Please provide a valid username and password.</ErrorMessage>
+        </ErrorContainer>      
+      )  
+    } else {
+      return null;
+    }
+  };
+
   const handleSignUpClick = () => {
     navigate("/signup");
-  }
+  };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   return (
     <LoginContainer>
@@ -47,18 +63,20 @@ const Login = () => {
         <h2 className="mb-3">Welcome! Are you ready to be great!</h2>
         <h4 className="mb-4">Log in or sign up now!</h4>
 
+        {renderSubmitError()}
+
         <Form onSubmit={handleSubmit(handleFormSubmit)} className="col-md-4">
 
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" placeholder="Username" name="username" {...register("username", { required: true })} />
-            {errors.username?.message}
+            <div style={{ color: "red" }}>{errors.username?.message ? "*" + capitalizeFirstLetter(errors.username?.message) : null}</div>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGroupPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" {...register("password", { required: true })} />
-            {errors.password?.message}
+            <div style={{ color: "red" }}>{errors.password?.message ? "*" + capitalizeFirstLetter(errors.password?.message) : null}</div>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3">
@@ -82,4 +100,15 @@ export default Login;
 
 const LoginContainer = styled.div`
   padding-top: 180px;
+`;
+
+const ErrorContainer = styled.div`
+  border: 1px solid #ff9b99;
+  border-radius: 5px;
+  background-color: #fad1d0;
+`;
+
+const ErrorMessage = styled.div`
+  padding: 10px;
+  color: #940128;
 `;
