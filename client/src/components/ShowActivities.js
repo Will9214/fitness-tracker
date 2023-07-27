@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container, Row, Col, CloseButton } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeActivityThunk } from "../redux/activities/activityActions";
 
 const ShowActivities = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { activities } = useSelector(state => state.userActivities);
+  const { userToken, activities } = useSelector(state => state.auth.userInfo);
+  const [ userActivities, setUserActivities] = useState(activities);
+
+  const handleActivityDeleteClick = (e) => {
+    const activityId = e.currentTarget.id;
+    dispatch(removeActivityThunk({ activityId, userToken }))
+  };
+
+  const renderUserActivities = () => {
+    if (activities) {
+      return userActivities.map((activity) => (
+        <div key={activity._id} id={activity._id} className="p-1">
+          <ActivityContainer>
+            <Row>
+              <Col>
+                {activity.name}
+              </Col>
+              <Col md={2}>
+                <CloseButton id={activity._id} onClick={handleActivityDeleteClick}/>
+              </Col>
+            </Row>
+            
+            
+          </ActivityContainer>
+        </div>
+      ))
+    }
+  }
 
   const handleAddActivityClick = () => {
     navigate("/add_activity");
@@ -16,16 +45,9 @@ const ShowActivities = () => {
   return (
     <ActivitiesContainer>
       <div className="display-6 text-center">Activities</div>
-      <hr className="m-0"/>
+      <hr className="m-1"/>
 
-
-      {activities.map((activity) => (
-        <div key={activity._id} id={activity._id} className="p-3">
-          <ActivityContainer>
-            {activity.name}
-          </ActivityContainer>
-        </div>
-      ))}   
+      {renderUserActivities()}
 
       <Container className="text-center mt-2 mb-3">
         <Button onClick={handleAddActivityClick}>Add Activity</Button>
@@ -46,5 +68,5 @@ const ActivitiesContainer = styled.div`
 const ActivityContainer = styled.div`
   border: 1px solid black;
   border-radius: 10px;
-  padding: 10px;
+  padding: 6px;
 `;

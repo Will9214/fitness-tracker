@@ -24,7 +24,7 @@ const Home = () => {
         </Row>
       </Container> 
 
-      <Col md={4} className="ps-5">
+      <Col md={3} className="ps-5">
 
         <ShowActivities />
           

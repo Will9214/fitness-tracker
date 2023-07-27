@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addActivity } from "./activityActions";
+import { addActivityThunk } from "./activityActions";
 
 export const activitySlice = createSlice({
   name: "activity",
@@ -9,12 +9,9 @@ export const activitySlice = createSlice({
   reducers: {
     getUserActivities: (state, { payload }) => {
       state.activities = payload.activities;
-    }
-
+    },
   },
-  extraReducers: {
-    
-  },
+  extraReducers: {},
 });
 
 export const { getUserActivities } = activitySlice.actions;

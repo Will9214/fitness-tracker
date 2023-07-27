@@ -50,12 +50,12 @@ exports.signIn = async function (req, res, next) {
 
 exports.currentUser = async function(req, res) { 
   const activities = await Activity.find({ user: req.user._id })
-  
+
   const user = {
     userId: req.user._id,
     username: req.user.username,
     userToken: tokenForUser(req.user),
-    // activities: activities,
+    activities: activities,
     // workouts
     // objectives
     // groups
@@ -63,5 +63,5 @@ exports.currentUser = async function(req, res) {
 
   
 
-  res.send({ user, activities });
+  res.send({ user });
 };

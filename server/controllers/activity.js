@@ -29,5 +29,21 @@ exports.addActivity = async function(req, res, next) {
 };
 
 exports.getUserActivities = async function(req, res, next) {
-  
+
+};
+
+exports.updateActivity = async function(req, res, next) {
+
+};
+
+exports.removeActivity = async function(req, res, next) {
+  const { activityId } = req.body;
+
+  const deletedActivity = await Activity.findByIdAndDelete(activityId);
+  const user = await User.findById(deletedActivity.user);
+  const deletedActivityIndex = user.activities.indexOf(activityId);
+  user.activities.splice(deletedActivityIndex, 1);
+  await user.save();
+
+  res.status(200).send(deletedActivity);
 };
