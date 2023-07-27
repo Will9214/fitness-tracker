@@ -7,27 +7,44 @@ import { useNavigate } from "react-router-dom";
 const ShowActivities = () => {
   const navigate = useNavigate();
 
+  const { activities } = useSelector(state => state.userActivities);
+
   const handleAddActivityClick = () => {
     navigate("/add_activity");
   };
 
   return (
-    <ActivityContainer>
+    <ActivitiesContainer>
       <div className="display-6 text-center">Activities</div>
       <hr className="m-0"/>
 
-      <Container className="text-center mt-2">
+
+      {activities.map((activity) => (
+        <div key={activity._id} id={activity._id} className="p-3">
+          <ActivityContainer>
+            {activity.name}
+          </ActivityContainer>
+        </div>
+      ))}   
+
+      <Container className="text-center mt-2 mb-3">
         <Button onClick={handleAddActivityClick}>Add Activity</Button>
       </Container>
       
-    </ActivityContainer>
+    </ActivitiesContainer>
   )
 };
 
 export default ShowActivities;
 
+const ActivitiesContainer = styled.div`
+  border: 1px solid black;
+  height: auto;
+  border-radius: 10px;
+`;
+
 const ActivityContainer = styled.div`
   border: 1px solid black;
-  height: 250px;
   border-radius: 10px;
+  padding: 10px;
 `;

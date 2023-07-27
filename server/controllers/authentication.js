@@ -1,6 +1,7 @@
 const jwt = require("jwt-simple");
 const keys = require("../config/dev");
 const User = require("../models/user");
+const Activity = require("../models/activity");
 
 function tokenForUser(user) {
   return jwt.encode({ sub: user.id,
@@ -47,18 +48,20 @@ exports.signIn = async function (req, res, next) {
   })
 };
 
-exports.currentUser = function(req, res) {
-  console.log(req.user);
+exports.currentUser = async function(req, res) { 
+  const activities = await Activity.find({ user: req.user._id })
   
   const user = {
     userId: req.user._id,
     username: req.user.username,
     userToken: tokenForUser(req.user),
-    // activities
+    // activities: activities,
     // workouts
     // objectives
     // groups
   };
 
-  res.send(user);
+  
+
+  res.send({ user, activities });
 };

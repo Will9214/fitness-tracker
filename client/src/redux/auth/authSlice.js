@@ -20,7 +20,7 @@ export const authSlice = createSlice({
       state.success = false;
     },
     setCredentials: (state, { payload }) => {  
-      state.userInfo = payload;
+      state.userInfo = payload.user;
     },
   },
   extraReducers: {

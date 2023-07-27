@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetUserDetailsQuery } from "../redux/auth/authService";
 import {  signOut, setCredentials } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { getUserActivities } from "../redux/activities/activitySlice";
 
 
 const NavBar = () => {
@@ -20,7 +21,10 @@ const NavBar = () => {
   });  
   
   useEffect(() => {
-    if (data) dispatch(setCredentials(data))
+    if (data) {
+      dispatch(setCredentials(data));
+      dispatch(getUserActivities(data));
+    }
   }, [data, dispatch]);
 
   const handleSignOutClick = () => {

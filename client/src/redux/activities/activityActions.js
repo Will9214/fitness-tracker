@@ -3,9 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const backendURL = "http://127.0.0.1:5000";
 
-export const addActivity = createAsyncThunk(
+export const addActivityThunk = createAsyncThunk(
   "/api/addActivity",
-  async ({ data, userId, userToken }, { rejectWithValue}) => {
+  async ({ data, userId, userToken }, { rejectWithValue}, callback) => {
     try {    
       const config = {
         headers: {
@@ -23,7 +23,6 @@ export const addActivity = createAsyncThunk(
         return rejectWithValue(error.response.data)
       }
     }
-    debugger;
   }
 );
 

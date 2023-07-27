@@ -27,3 +27,7 @@ exports.addActivity = async function(req, res, next) {
       res.json(err);
     })
 };
+
+exports.getUserActivities = async function(req, res, next) {
+  
+};

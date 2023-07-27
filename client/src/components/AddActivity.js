@@ -5,7 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { addActivity } from "../redux/activities/activityActions";
+import { addActivityThunk } from "../redux/activities/activityActions";
+import { useNavigate } from "react-router-dom";
 
 const AddActivitySchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -20,6 +21,7 @@ const AddActivitySchema = Yup.object().shape({
 
 const AddActivity = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(AddActivitySchema)
@@ -28,8 +30,8 @@ const AddActivity = () => {
   const { userId, userToken } = useSelector((state) => state.auth.userInfo);
 
   const handleActivityFormSubmit = (data) => {
-    dispatch(addActivity({ data, userId, userToken }));
-  
+    dispatch(addActivityThunk({ data, userId, userToken }));
+    navigate("/home");
   };
 
   return(

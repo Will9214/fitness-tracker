@@ -14,5 +14,6 @@ module.exports = function(app) {
 
   // activity
   app.post("/api/addActivity", requireAuth, Activity.addActivity)
+  app.get("/api/getUserActivities", requireAuth, Activity.getUserActivities)
   
 }
