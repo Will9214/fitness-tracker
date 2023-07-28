@@ -1,12 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addActivityThunk, getUserActivities, removeActivityThunk } from "./activityActions";
+import { addActivityThunk, getUserActivities, removeActivityThunk, updateActivity } from "./activityActions";
 
 export const activitySlice = createSlice({
   name: "activity",
   initialState: {
     activities: [],
   },
-  reducers: {},
+  reducers: {
+    updateActivityReducer: (state, action) => {
+      const activity = state.activities.find(
+        (activity) => activity._id === action.payload.activityId
+      );
+      
+      activity.distance = action.payload.editActivityDistance;
+      activity.time = action.payload.editedActivityTime;
+      activity.weight = action.payload.editedActivityWeight;
+      activity.sets = action.payload.editedActivitySets;
+      activity.reps = action.payload.editedActivityReps;
+      
+    }
+  },
   extraReducers: async (builder) => {
     builder.addCase(getUserActivities.pending, (state) => {
       state.loading = true;
@@ -35,10 +48,32 @@ export const activitySlice = createSlice({
       state.loading = false;
       state.error = action.error.message || null;
     });
+    builder.addCase(updateActivity.pending, (state) =>{
+      state.loading = true;
+    });
+    builder.addCase(updateActivity.fulfilled, (state, action) => {
+      
+      // I couldn't get this code working down here so I just made a separate reducer above, which will also require a separate dispatch in the activity component
+
+      // const activity = state.activities.find(activity => activity._id === action.payload._id);
+      // activity.distance = action.payload.distance;
+      // activity.time = action.payload.time;
+      // activity.weight = action.payload.weight;
+      // activity.sets = action.payload.sets;
+      // activity.reps = action.payload.reps;
+
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(updateActivity.rejected, (state, action) => {
+      console.log("rejected updateActivity");
+      state.loading = false;
+      state.error = action.error.message || null;
+    });
 
   },
 });
 
-
+export const { updateActivityReducer } = activitySlice.actions;
 
 export default activitySlice.reducer;

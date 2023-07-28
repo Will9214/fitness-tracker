@@ -31,13 +31,25 @@ exports.addActivity = async function(req, res, next) {
 
 exports.getUserActivities = async function(req, res, next) {
   const activities = await Activity.find({ user: req.user._id })
-  console.log(req.user);
   
   res.send({ activities })
 };
 
 exports.updateActivity = async function(req, res, next) {
+  const { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps } = req.body;
+  
+  const activity = await Activity.findByIdAndUpdate(activityId, {
+    distance: editedActivityDistance,
+    time: editedActivityTime,
+    weight: editedActivityWeight,
+    sets: editedActivitySets,
+    reps: editedActivityReps
+  });
+  activity.save();
 
+console.log(activity);
+
+  res.status(200).send(activity);
 };
 
 exports.removeActivity = async function(req, res, next) {

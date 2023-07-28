@@ -72,4 +72,28 @@ export const removeActivityThunk = createAsyncThunk(
   }
 );
 
+export const updateActivity = createAsyncThunk(
+  "/api/updateActivity",
+  async ({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`
+        }
+      };
+      const { data } = await axios.post(
+        `${backendURL}/api/updateActivity`,
+        { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps },
+        config,
+      );
+      return data;
+    } catch (error) {
+      if (error.response.message) {
+        return rejectWithValue(error.response.message)
+      }
+    }
+  }
+);
+
 
