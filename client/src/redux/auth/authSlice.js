@@ -19,9 +19,6 @@ export const authSlice = createSlice({
       state.error = null;
       state.success = false;
     },
-    setCredentials: (state, { payload }) => {  
-      state.user = payload.user;
-    },
   },
   extraReducers: {
     [signUp.pending]: (state) => {

@@ -10,8 +10,8 @@ const ShowActivities = () => {
   const dispatch = useDispatch();
 
   const { userToken } = useSelector(state => state.auth);
-  const { activities } = useSelector(state => state.auth.user);
-  const [ userActivities, setUserActivities] = useState(activities);
+  const { activities } = useSelector(state => state.userActivities);
+  // const [ userActivities, setUserActivities] = useState(activities);
 
   const handleActivityDeleteClick = (e) => {
     const activityId = e.currentTarget.id;
@@ -20,7 +20,7 @@ const ShowActivities = () => {
 
   const renderUserActivities = () => {
     if (activities) {
-      return userActivities.map((activity) => (
+      return activities.map((activity) => (
         <div key={activity._id} id={activity._id} className="p-1">
           <ActivityContainer>
             <Row>

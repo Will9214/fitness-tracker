@@ -26,6 +26,29 @@ export const addActivityThunk = createAsyncThunk(
   }
 );
 
+export const getUserActivities = createAsyncThunk(
+  "/api/getUserActivities",
+  async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`
+        },
+      };
+      const { data } = await axios.get(
+        `${backendURL}/api/getUserActivities`,
+        config
+      );
+      console.log(data, "activities");
+      
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+)
+
 export const removeActivityThunk = createAsyncThunk(
   "/api/removeActivity",
   async ({ activityId, userToken }, { rejectWithValue }) => {

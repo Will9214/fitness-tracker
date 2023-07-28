@@ -65,14 +65,12 @@ export const getUser = createAsyncThunk(
         `${backendURL}/auth/getCurrentUser`,
         config
       );
-      console.log(data);
+      console.log(data, "user");
       localStorage.setItem("userToken", data.userToken);
 
       return data;
     } catch (error) {
-      // if (error.response.status) {
-      //   return rejectWithValue(error.response.status);
-      // }
+      return error;
     }
   }
 );

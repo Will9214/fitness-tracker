@@ -5,11 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import ShowActivities from "./ShowActivities";
+import { getUserActivities } from "../redux/activities/activityActions";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
+  const userToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUserActivities())
+    }
+  }, [userToken, dispatch] )
 
   return (
     <HomeContainer>
