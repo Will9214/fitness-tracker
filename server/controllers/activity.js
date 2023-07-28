@@ -3,7 +3,7 @@ const Activity = require("../models/activity");
 
 exports.addActivity = async function(req, res, next) {
   const { userId } = req.body;
-  const { name, type, description, time, distance, sets, reps } = req.body.data;
+  const { name, type, description, time, distance, weight, sets, reps } = req.body.data;
 
   User.findById(userId)
     .then((user) => {
@@ -13,6 +13,7 @@ exports.addActivity = async function(req, res, next) {
         description: description,
         time: time,
         distance: distance,
+        weight: weight,
         sets: sets,
         reps: reps,
         iat: new Date(),

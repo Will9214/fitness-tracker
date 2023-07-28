@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Home from "./components/Home";
 import ProtectedRoute from './routing/ProtectedRoute';
 import AddActivity from './components/AddActivity';
+import Activity from './components/Activity';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
             <Route path="/add_activity" element={<AddActivity />} />
+            <Route path="/activities/:activityId" element={<Activity />} />
           </Route>
         </Routes>
       </BrowserRouter>

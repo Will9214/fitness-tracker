@@ -13,6 +13,11 @@ const ShowActivities = () => {
   const { activities } = useSelector(state => state.userActivities);
   // const [ userActivities, setUserActivities] = useState(activities);
 
+  const handleActivityClick = (e) => {
+    const activityId = e.currentTarget.id;
+    navigate(`/activities/${activityId}`);
+  };
+
   const handleActivityDeleteClick = (e) => {
     const activityId = e.currentTarget.id;
     dispatch(removeActivityThunk({ activityId }))
@@ -22,7 +27,7 @@ const ShowActivities = () => {
     if (activities) {
       return activities.map((activity) => (
         <div key={activity._id} id={activity._id} className="p-1">
-          <ActivityContainer>
+          <ActivityContainer id={activity._id} onClick={handleActivityClick}>
             <Row>
               <Col>
                 {activity.name}
@@ -70,4 +75,7 @@ const ActivityContainer = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   padding: 6px;
+  &:hover {
+    background-color: #e0e0e0;
+  }
 `;
