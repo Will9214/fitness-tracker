@@ -15,7 +15,7 @@ const ShowActivities = () => {
 
   const handleActivityDeleteClick = (e) => {
     const activityId = e.currentTarget.id;
-    dispatch(removeActivityThunk({ activityId, userToken }))
+    dispatch(removeActivityThunk({ activityId }))
   };
 
   const renderUserActivities = () => {

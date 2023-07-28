@@ -5,12 +5,12 @@ const backendURL = "http://127.0.0.1:5000";
 
 export const addActivityThunk = createAsyncThunk(
   "/api/addActivity",
-  async ({ data, userId, userToken }, { rejectWithValue }) => {
+  async ({ data, userId }, { rejectWithValue }) => {
     try {    
       const config = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userToken}`,
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
         }
       }
       await axios.post(
@@ -51,21 +51,19 @@ export const getUserActivities = createAsyncThunk(
 
 export const removeActivityThunk = createAsyncThunk(
   "/api/removeActivity",
-  async ({ activityId, userToken }, { rejectWithValue }) => {
-    try {  
-      console.log(localStorage.getItem("userToken"));
-      
+  async ({ activityId }, { rejectWithValue }) => {
+    try {
       const config = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userToken}`,
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
         }
       }
       await axios.delete(
         `${backendURL}/api/removeActivity`,
         { activityId },
         config
-      )
+      );
     } catch (error) {
       if (error.response.data) {
         return rejectWithValue(error.response.data)
