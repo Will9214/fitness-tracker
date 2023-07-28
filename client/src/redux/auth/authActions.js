@@ -31,7 +31,7 @@ export const signIn = createAsyncThunk(
     try {
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
       }
       const { data } = await axios.post(
@@ -39,13 +39,40 @@ export const signIn = createAsyncThunk(
         { username, password },
         config
       )
-      localStorage.setItem("userToken", data.userToken)    
-      return data
+      localStorage.setItem("userToken", data.userToken);
+      
+      return data;
     } catch (error) {
       // return error message from API
       if (error.response.status) {
-        return rejectWithValue(error.response.status)
+        return rejectWithValue(error.response.status);
       }
+    }
+  }
+);
+
+export const getUser = createAsyncThunk(
+  "/auth/getCurrentUser",
+  async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`
+        },
+      };
+      const { data } = await axios.get(
+        `${backendURL}/auth/getCurrentUser`,
+        config
+      );
+      console.log(data);
+      localStorage.setItem("userToken", data.userToken);
+
+      return data;
+    } catch (error) {
+      // if (error.response.status) {
+      //   return rejectWithValue(error.response.status);
+      // }
     }
   }
 );

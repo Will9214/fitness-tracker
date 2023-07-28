@@ -42,26 +42,27 @@ exports.signUp = function (req, res, next) {
 exports.signIn = async function (req, res, next) {
   // User has already had their email and password auth'd
   // Just need to give them a token
-  res.send({
-    username: req.body.username,
-    userToken: tokenForUser(req.user),
-  })
+  const username = { 
+    username: req.body.username, 
+  };
+  const userToken = tokenForUser(req.user);
+
+  res.send({ username, userToken })
 };
 
-exports.currentUser = async function(req, res) { 
+exports.getCurrentUser = async function(req, res) {   
   const activities = await Activity.find({ user: req.user._id })
-
+  
   const user = {
     userId: req.user._id,
     username: req.user.username,
-    userToken: tokenForUser(req.user),
-    activities: activities,
+    // activities: activities,
     // workouts
     // objectives
     // groups
   };
 
-  
+  const userToken = tokenForUser(req.user);
 
-  res.send({ user });
+  res.send({ user, userToken });
 };

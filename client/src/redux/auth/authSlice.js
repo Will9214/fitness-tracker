@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUp, signIn } from "./authActions";
+import { signUp, signIn, getUser } from "./authActions";
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     loading: false,
-    userInfo: null,
+    user: null,
     userToken: localStorage.getItem("userToken") || "",
     error: null,
     success: false,
@@ -14,13 +14,13 @@ export const authSlice = createSlice({
     signOut: (state) => {
       localStorage.removeItem("userToken");
       state.loading = false;
-      state.userInfo = null;
+      state.user = null;
       state.userToken = null;
       state.error = null;
       state.success = false;
     },
     setCredentials: (state, { payload }) => {  
-      state.userInfo = payload.user;
+      state.user = payload.user;
     },
   },
   extraReducers: {
@@ -42,13 +42,26 @@ export const authSlice = createSlice({
     },
     [signIn.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
+      state.user = payload.username;
       state.userToken = payload.userToken;
     },
     [signIn.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
+    [getUser.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getUser.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.user = payload.user;
+      state.userToken = payload.userToken;
+    },
+    [getUser.rejected]: (state, {payload }) => {
+      state.loading = false;
+      state.error = payload;
+    }
   },
 });
 

@@ -15,7 +15,7 @@ const userSchema = Yup.object().shape({
 
 const Signup = () => {
 
-  const { loading, userInfo, error, success } = useSelector((state) => state.auth);
+  const { loading, user, error, success } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ const Signup = () => {
     if (success) navigate("/")
     
     // redirect authenticated user to home
-    if (userInfo) navigate("/home")
-  }, [navigate, userInfo, success]);
+    if (user) navigate("/home")
+  }, [navigate, user, success]);
 
   const handleFormSubmit = (data) => {
     dispatch(signUp(data));

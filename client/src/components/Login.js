@@ -16,7 +16,7 @@ const userSchema = Yup.object().shape({
 
 const Login = () => {
 
-  const { loading, userInfo, error } = useSelector((state) => state.auth);
+  const { loading, user, error } = useSelector((state) => state.auth);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
@@ -26,10 +26,10 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userInfo) {
+    if (user) {
       navigate("/home")
     }
-  }, [navigate, userInfo]);
+  }, [navigate, user]);
 
   const handleFormSubmit = (data) => {
     dispatch(signIn(data

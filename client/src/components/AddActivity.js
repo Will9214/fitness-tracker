@@ -27,7 +27,8 @@ const AddActivity = () => {
     resolver: yupResolver(AddActivitySchema)
   });
 
-  const { userId, userToken } = useSelector((state) => state.auth.userInfo);
+  const { userToken } = useSelector((state) => state.auth);
+  const { userId } = useSelector((state) => state.auth.user);
 
   const handleActivityFormSubmit = (data) => {
     dispatch(addActivityThunk({ data, userId, userToken }));

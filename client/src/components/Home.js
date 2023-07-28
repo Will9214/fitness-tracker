@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 import ShowActivities from "./ShowActivities";
 
-
 const Home = () => {
-  const { userInfo } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   return (
     <HomeContainer>
@@ -18,7 +17,7 @@ const Home = () => {
         <Row>
           <Col>
             <h1 className="display-3">
-              Welcome {userInfo.username}! You are successfully logged in!!
+              Welcome {user.username}! You are successfully logged in!!
             </h1>
           </Col>
         </Row>

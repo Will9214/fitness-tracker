@@ -9,7 +9,8 @@ const ShowActivities = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userToken, activities } = useSelector(state => state.auth.userInfo);
+  const { userToken } = useSelector(state => state.auth);
+  const { activities } = useSelector(state => state.auth.user);
   const [ userActivities, setUserActivities] = useState(activities);
 
   const handleActivityDeleteClick = (e) => {

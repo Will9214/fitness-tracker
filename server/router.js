@@ -12,7 +12,7 @@ module.exports = function(app) {
   // auth
   app.post("/auth/signup", Authentication.signUp)
   app.post("/auth/signin", requireSignin, Authentication.signIn)
-  app.get("/auth/current_user", requireAuth, Authentication.currentUser)
+  app.get("/auth/getCurrentUser", requireAuth, Authentication.getCurrentUser)
 
   // activities
   app.post("/api/addActivity", requireAuth, Activity.addActivity)

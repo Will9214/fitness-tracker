@@ -29,7 +29,10 @@ exports.addActivity = async function(req, res, next) {
 };
 
 exports.getUserActivities = async function(req, res, next) {
-
+  const activities = await Activity.find({ user: req.user._id })
+  console.log(req.user);
+  
+  res.send({ activities })
 };
 
 exports.updateActivity = async function(req, res, next) {

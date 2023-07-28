@@ -6,26 +6,38 @@ import { useGetUserDetailsQuery } from "../redux/auth/authService";
 import {  signOut, setCredentials } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { getUserActivities } from "../redux/activities/activitySlice";
+import { getUser } from "../redux/auth/authActions";
 
 
 const NavBar = () => {
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { user, userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // authenticate user if token is found
-  const { data, isFetching } = useGetUserDetailsQuery("userDetails", {
-    // perform a refetch every 15 mins
-    pollingInterval: 900000,
-  });  
+  // // authenticate user if token is found
+  // const { data, isFetching } = useGetUserDetailsQuery("userDetails", {
+  //   // perform a refetch every 15 mins
+  //   pollingInterval: 900000,
+  // });  
   
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(setCredentials(data));
+  //     dispatch(getUserActivities(data));
+  //   }
+  // }, [data, dispatch]);
+
+
+  // Keeping this in NavBar because user needs to be present to navigate to /home
+  // A refresh of the page caused user to change to null and navigate away from /home
+  // Since the useEffect was in home it couldn't be triggered to repopulate user
+  // Will only have fetchUser in Navbar. All others will be on home component
   useEffect(() => {
-    if (data) {
-      dispatch(setCredentials(data));
-      dispatch(getUserActivities(data));
+    if (userToken) {
+      dispatch(getUser())
     }
-  }, [data, dispatch]);
+  }, [userToken, dispatch] )
 
   const handleSignOutClick = () => {
     dispatch(signOut());
@@ -33,11 +45,11 @@ const NavBar = () => {
   }
 
   const renderLinks = () => {
-    if (userInfo) {
+    if (user) {
       return (
         <Fragment>
           <Col md={6}>
-            <UserNameDiv>{userInfo.username}</UserNameDiv>
+            <UserNameDiv>{user.username}</UserNameDiv>
           </Col>
           <Col md={2}>
             <SignOutDiv onClick={handleSignOutClick}>Sign Out</SignOutDiv>
