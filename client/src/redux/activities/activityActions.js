@@ -55,15 +55,15 @@ export const removeActivityThunk = createAsyncThunk(
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
         }
       }
-      await axios.delete(
+      const { data } = await axios.delete(
         `${backendURL}/api/removeActivity`,
-        { activityId },
-        config
+        { data: { activityId: activityId },
+          headers: {"Authorization": `Bearer ${localStorage.getItem("userToken")}`}},
       );
+      return data;
     } catch (error) {
       if (error.response.data) {
         return rejectWithValue(error.response.data)
