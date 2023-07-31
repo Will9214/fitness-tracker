@@ -14,13 +14,20 @@ const ShowActivities = () => {
   // const [ userActivities, setUserActivities] = useState(activities);
 
   const handleActivityClick = (e) => {
-    const activityId = e.currentTarget.id;
-    navigate(`/activities/${activityId}`);
+
+    if (e.target.ariaLabel !== "remove") {
+      const activityId = e.currentTarget.id;
+      navigate(`/activities/${activityId}`);
+    }
+
   };
 
   const handleActivityDeleteClick = (e) => {
-    const activityId = e.currentTarget.id;
-    dispatch(removeActivityThunk({ activityId }))
+    if (e.target.ariaLabel === "remove") {
+      const activityId = e.currentTarget.id;
+      dispatch(removeActivityThunk({ activityId }));
+    }
+    
   };
 
   const renderUserActivities = () => {
@@ -33,7 +40,7 @@ const ShowActivities = () => {
                 {activity.name}
               </Col>
               <Col md={2}>
-                <CloseButton id={activity._id} onClick={handleActivityDeleteClick}/>
+                <CloseButton id={activity._id} onClick={handleActivityDeleteClick} aria-label="remove"/>
               </Col>
             </Row>
             
@@ -77,5 +84,5 @@ const ActivityContainer = styled.div`
   padding: 6px;
   &:hover {
     background-color: #e0e0e0;
-  }
+  };
 `;
