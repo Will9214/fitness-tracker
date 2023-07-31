@@ -11,8 +11,8 @@ export const activitySlice = createSlice({
       const activity = state.activities.find(
         (activity) => activity._id === action.payload.activityId
       );
-      
-      activity.distance = action.payload.editActivityDistance;
+    
+      activity.distance = action.payload.editedActivityDistance;
       activity.time = action.payload.editedActivityTime;
       activity.weight = action.payload.editedActivityWeight;
       activity.sets = action.payload.editedActivitySets;
