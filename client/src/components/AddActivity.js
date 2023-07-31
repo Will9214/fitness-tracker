@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { addActivityThunk } from "../redux/activities/activityActions";
 import { useNavigate } from "react-router-dom";
+import { render } from "react-dom";
 
 const AddActivitySchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -39,6 +40,52 @@ const AddActivity = () => {
     navigate("/home");
   };
 
+  // Display specific form inputs depending on type of activity selected
+  const [activityType, setActivityType] = useState("");
+  
+  const handleSelectType = (e) => {
+    setActivityType(e.currentTarget.value);
+  };
+
+  const renderActivityInputsByType = () => {
+    if (activityType === "Strength") {
+      return (
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridWeight">
+            <Form.Label>Weight Lifted</Form.Label>
+            <Form.Control type="text" placeholder="Enter weight" name="weight" {...register("weight", { required: false })}/>
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridSets">
+            <Form.Label>Sets</Form.Label>
+            <Form.Control type="text" placeholder="Enter number of sets" name="sets" {...register("sets", { required: false })} />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridReps">
+            <Form.Label>Reps</Form.Label>
+            <Form.Control type="text" placeholder="Enter number of reps" name="reps" {...register("reps", { required: false })}/>
+          </Form.Group>
+        </Row>
+      )
+    } else if (activityType === "Cardio") {
+      return (
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridDuration">
+            <Form.Label>Duration</Form.Label>
+            <Form.Control type="text" placeholder="Enter duration of activity" name="time" {...register("time", { required: false })}/>
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridDistance">
+            <Form.Label>Distance</Form.Label>
+            <Form.Control type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
+          </Form.Group>
+        </Row>
+      )
+    } else {
+      return null;
+    }
+  };
+
   return(
     <AddActivityContainer className="container">
       <FormContainer className="col-md-8 offset-md-2">
@@ -54,11 +101,11 @@ const AddActivity = () => {
 
             <Form.Group as={Col} controlId="formGridActivityType">
               <Form.Label>Type</Form.Label>
-              <Form.Select defaultValue="Choose..." name="type" {...register("type", {required: true })}>
+              <Form.Select defaultValue="Choose..." name="type" {...register("type", {required: true })} onChange={handleSelectType}>
                 {errors.type?.message}
-                <option>Choose...</option>
-                <option>Strength</option>
-                <option>Cardio</option>
+                <option value="">Choose...</option>
+                <option value ="Strength">Strength</option>
+                <option value="Cardio">Cardio</option>
               </Form.Select>
             </Form.Group>
           </Row>
@@ -68,34 +115,7 @@ const AddActivity = () => {
             <Form.Control as="textarea" placeholder="Enter a description of your activity" name="description" {...register("description", { required: false })}/>
           </Form.Group>
 
-          <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridWeight">
-              <Form.Label>Weight Lifted</Form.Label>
-              <Form.Control type="text" placeholder="Enter weight" name="weight" {...register("weight", { required: false })}/>
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridSets">
-              <Form.Label>Sets</Form.Label>
-              <Form.Control type="text" placeholder="Enter number of sets" name="sets" {...register("sets", { required: false })} />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridReps">
-              <Form.Label>Reps</Form.Label>
-              <Form.Control type="text" placeholder="Enter number of reps" name="reps" {...register("reps", { required: false })}/>
-            </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridDuration">
-              <Form.Label>Duration</Form.Label>
-              <Form.Control type="text" placeholder="Enter duration of activity" name="time" {...register("time", { required: false })}/>
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridDistance">
-              <Form.Label>Distance</Form.Label>
-              <Form.Control type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
-            </Form.Group>
-          </Row>
+          {renderActivityInputsByType()}
           
           <Row className="text-center">
             <Col>

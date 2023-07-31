@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
@@ -26,6 +26,106 @@ const Activity = () => {
   const activity = activities.find(activity => activity._id === pathId);
 
   const activityId = activity._id;
+
+  // Not going to do ternary operator for this because there might be more activity types in the future
+  const renderActivityDataByType = () => {
+    if (activity.type === "Strength") {
+      return (
+        <Fragment>
+          <Row> 
+            <Col className="col-md-4">
+              <Row>
+                <Col className="col-md-auto">
+                  <FieldTitle>Weight: </FieldTitle>
+                </Col>
+                <Col className="col-md-auto">
+  
+                  {isEditing ? (
+                    <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
+                  ) : (
+                    <div>{activity.weight}</div>
+                  )}          
+                    
+                </Col>
+              </Row>
+            </Col>
+            <Col className="col-md-4">
+              <Row>
+                <Col className="col-md-auto">
+                  <FieldTitle>Sets: </FieldTitle>
+                </Col>
+                <Col className="col-md-4">
+                  
+                  {isEditing ? (
+                    <input onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
+                  ) : (
+                    <div>{activity.sets}</div>
+                  )}
+
+                </Col>
+              </Row>
+            </Col>
+            <Col className="col-md-4">
+              <Row>
+                <Col className="col-md-auto">
+                  <FieldTitle>Reps: </FieldTitle>
+                </Col>
+                <Col className="col-md-auto">
+                    
+                  {isEditing ? (
+                    <input onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
+                  ) : (
+                    <div>{activity.reps}</div>
+                  )}
+
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <hr />
+        </Fragment>
+      );
+    } else if (activity.type === "Cardio") {
+      return (
+        <Fragment>
+          <Row>
+            <Col className="col-md-6">
+              <Row>
+                <Col className="col-md-auto">
+                  <FieldTitle>Distance: </FieldTitle>
+                </Col>
+                <Col className="col-md-auto">
+              
+                  {isEditing ? (
+                    <input onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
+                  ) : (
+                    <div>{activity.distance}</div>
+                  )}
+
+                </Col>
+              </Row>
+            </Col>
+
+            <Col className="col-md-6">
+              <Row>
+                <Col className="col-md-auto">
+                  <FieldTitle>Time: </FieldTitle>
+                </Col>
+                <Col className="col-md-auto">
+                  {isEditing ? (
+                    <input onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
+                  ) : (
+                    <div>{activity.time}</div>
+                  )}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <hr />
+        </Fragment>
+      );
+    }
+  };
 
   // useState for toggling the inputs for editing the activity
   const [isEditing, setIsEditing] = useState(false);
@@ -60,7 +160,6 @@ const Activity = () => {
     dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps}));
     dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps }));
     
-
     setIsEditing(false);
   };
 
@@ -72,117 +171,32 @@ const Activity = () => {
 
           <Container className="col-md-8 offset-md-2">
 
-            <Row>
+            <Row className="mb-2">
               <Col className="col-md-auto">
                 <FieldTitle>
                   Type:
                 </FieldTitle>
-                <FieldTitle>
-                  Description:
-                </FieldTitle>
               </Col>
-              <Col className="col-md-auto">
+              <Col>
                 <div>
                   {activity.type}
                 </div>
-                <div>
-                  {activity.description}
-                </div>
               </Col>
+            </Row>
+            <Row>
+              <FieldTitle>
+                Description:
+              </FieldTitle>
+                  
+              <div style={{ paddingLeft: "30px"}}>
+                {activity.description}
+              </div>      
             </Row>
 
             <hr/>
 
-            <Row>
-              <Col className="col-md-6">
-                <Row>
-                  <Col className="col-md-auto">
-                    <FieldTitle>Distance: </FieldTitle>
-                  </Col>
-                  <Col className="col-md-auto">
-                  
-                    {isEditing ? (
-                      <input onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
-                    ) : (
-                      <div>{activity.distance}</div>
-                    )}
+            {renderActivityDataByType()}
 
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col className="col-md-6">
-                <Row>
-                  <Col className="col-md-auto">
-                    <FieldTitle>Time: </FieldTitle>
-                  </Col>
-                  <Col className="col-md-auto">
-                    {isEditing ? (
-                      <input onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
-                    ) : (
-                      <div>{activity.time}</div>
-                    )}
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-
-            <hr />
-
-            <Row>
-              <Col className="col-md-4">
-                <Row>
-                  <Col className="col-md-auto">
-                    <FieldTitle>Weight: </FieldTitle>
-                  </Col>
-                  <Col className="col-md-auto">
-
-                  
-                    {isEditing ? (
-                      <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
-                    ) : (
-                      <div>{activity.weight}</div>
-                    )}
-                    
-                    
-                  </Col>
-                </Row>
-              </Col>
-              <Col className="col-md-4">
-                <Row>
-                  <Col className="col-md-auto">
-                    <FieldTitle>Sets: </FieldTitle>
-                  </Col>
-                  <Col className="col-md-4">
-                    
-                    {isEditing ? (
-                      <input onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
-                    ) : (
-                      <div>{activity.sets}</div>
-                    )}
-
-                  </Col>
-                </Row>
-              </Col>
-              <Col className="col-md-4">
-                <Row>
-                  <Col className="col-md-auto">
-                    <FieldTitle>Reps: </FieldTitle>
-                  </Col>
-                  <Col className="col-md-auto">
-                    
-                    {isEditing ? (
-                      <input onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
-                    ) : (
-                      <div>{activity.reps}</div>
-                    )}
-
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-
-            <hr />
             <Container className="text-center mt-2 mb-3">
               
               {isEditing ? (
@@ -222,5 +236,6 @@ const ActivityContainer = styled.div`
 
 const FieldTitle = styled.div`
   text-decoration: underline;
+  font-weight: 700;
 `;
 
