@@ -9,7 +9,7 @@ function tokenForUser(user) {
   exp: Math.round(Date.now() / 1000 + 5 * 60 * 60)}, keys.TOKEN_SECRET)
 };
 
-exports.signUp = function (req, res, next) {
+const signUp = function (req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -39,7 +39,7 @@ exports.signUp = function (req, res, next) {
   });
 };
 
-exports.signIn = async function (req, res, next) {
+const signIn = async function (req, res, next) {
   // User has already had their email and password auth'd
   // Just need to give them a token
   const username = { 
@@ -50,8 +50,8 @@ exports.signIn = async function (req, res, next) {
   res.send({ username, userToken })
 };
 
-exports.getCurrentUser = async function(req, res) {   
-  const activities = await Activity.find({ user: req.user._id })
+const getCurrentUser = async function(req, res) {   
+  // const activities = await Activity.find({ user: req.user._id })
   
   const user = {
     userId: req.user._id,
@@ -65,4 +65,10 @@ exports.getCurrentUser = async function(req, res) {
   const userToken = tokenForUser(req.user);
 
   res.send({ user, userToken });
+};
+
+module.exports = {
+  signUp,
+  signIn,
+  getCurrentUser,
 };

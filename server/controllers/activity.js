@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Activity = require("../models/activity");
 
-exports.addActivity = async function(req, res, next) {
+const addActivity = async function(req, res, next) {
   const { userId } = req.body;
   const { name, type, description, time, distance, weight, sets, reps } = req.body.data;
 
@@ -29,13 +29,13 @@ exports.addActivity = async function(req, res, next) {
     })
 };
 
-exports.getUserActivities = async function(req, res, next) {
+const getUserActivities = async function(req, res, next) {
   const activities = await Activity.find({ user: req.user._id })
   
   res.send({ activities })
 };
 
-exports.updateActivity = async function(req, res, next) {
+const updateActivity = async function(req, res, next) {
   const { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps } = req.body;
   
   const activity = await Activity.findByIdAndUpdate(activityId, {
@@ -52,7 +52,7 @@ console.log(activity);
   res.status(200).send(activity);
 };
 
-exports.removeActivity = async function(req, res, next) {
+const removeActivity = async function(req, res, next) {
   const { activityId } = req.body;
 
   const deletedActivity = await Activity.findByIdAndDelete(activityId);
@@ -62,4 +62,11 @@ exports.removeActivity = async function(req, res, next) {
   await user.save();
 
   res.status(200).send(deletedActivity);
+};
+
+module.exports = {
+  addActivity,
+  getUserActivities,
+  updateActivity,
+  removeActivity,
 };
