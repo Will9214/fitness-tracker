@@ -35,6 +35,10 @@ const AddActivity = () => {
     navigate("/home");
   };
 
+  const handleBackClick = () => {
+    navigate("/home");
+  };
+
   return(
     <AddActivityContainer className="container">
       <FormContainer className="col-md-8 offset-md-2">
@@ -92,10 +96,20 @@ const AddActivity = () => {
               <Form.Control type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
             </Form.Group>
           </Row>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          
+          <Row className="text-center">
+            <Col>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Col>
+            <Col>
+              <Button variant="primary" onClick={handleBackClick}>
+                Back
+              </Button>
+            </Col>        
+          </Row>
+  
         </Form> 
       </FormContainer>
     </AddActivityContainer>
