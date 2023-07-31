@@ -16,20 +16,20 @@ const Activity = () => {
   const { activities } = useSelector(state => state.userActivities);
 
   // Trying to get state to refetch on page refresh
-  // if (activities === []) {
-  //   getUserActivities();
-  // }
+  if (activities.length === 0) {
+    dispatch(getUserActivities());
+  }
 
   const location = useLocation();
   const path = matchPath("/activities/:activityId", location.pathname);
   const pathId = path.params.activityId;
-  const activity = activities.find(activity => activity._id === pathId);
+  const activity = activities.find(activity => activity?._id === pathId);
 
-  const activityId = activity._id;
+  const activityId = activity?._id;
 
   // Not going to do ternary operator for this because there might be more activity types in the future
   const renderActivityDataByType = () => {
-    if (activity.type === "Strength") {
+    if (activity?.type === "Strength") {
       return (
         <Fragment>
           <Row> 
@@ -43,7 +43,7 @@ const Activity = () => {
                   {isEditing ? (
                     <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
                   ) : (
-                    <div>{activity.weight}</div>
+                    <div>{activity?.weight}</div>
                   )}          
                     
                 </Col>
@@ -59,7 +59,7 @@ const Activity = () => {
                   {isEditing ? (
                     <input onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
                   ) : (
-                    <div>{activity.sets}</div>
+                    <div>{activity?.sets}</div>
                   )}
 
                 </Col>
@@ -75,7 +75,7 @@ const Activity = () => {
                   {isEditing ? (
                     <input onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
                   ) : (
-                    <div>{activity.reps}</div>
+                    <div>{activity?.reps}</div>
                   )}
 
                 </Col>
@@ -85,7 +85,7 @@ const Activity = () => {
           <hr />
         </Fragment>
       );
-    } else if (activity.type === "Cardio") {
+    } else if (activity?.type === "Cardio") {
       return (
         <Fragment>
           <Row>
@@ -99,7 +99,7 @@ const Activity = () => {
                   {isEditing ? (
                     <input onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
                   ) : (
-                    <div>{activity.distance}</div>
+                    <div>{activity?.distance}</div>
                   )}
 
                 </Col>
@@ -115,7 +115,7 @@ const Activity = () => {
                   {isEditing ? (
                     <input onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
                   ) : (
-                    <div>{activity.time}</div>
+                    <div>{activity?.time}</div>
                   )}
                 </Col>
               </Row>
@@ -132,19 +132,19 @@ const Activity = () => {
   const handleEditActivityClick = () => setIsEditing(true);
   const handleCancelClick = () => {
     setIsEditing(false);
-    setEditedActivityDistance(activity.distance);
-    setEditedActivityTime(activity.time);
-    setEditedActivityWeight(activity.weight);
-    setEditedActivitySets(activity.sets);
-    setEditedActivityReps(activity.reps);
+    setEditedActivityDistance(activity?.distance);
+    setEditedActivityTime(activity?.time);
+    setEditedActivityWeight(activity?.weight);
+    setEditedActivitySets(activity?.sets);
+    setEditedActivityReps(activity?.reps);
   };
 
   // using useState to manage updating values of the activity properties
-  const [editedActivityDistance, setEditedActivityDistance] = useState(activity.distance);
-  const [editedActivityTime, setEditedActivityTime] = useState(activity.time);
-  const [editedActivityWeight, setEditedActivityWeight] = useState(activity.weight);
-  const [editedActivitySets, setEditedActivitySets] = useState(activity.sets);
-  const [editedActivityReps, setEditedActivityReps] = useState(activity.reps);
+  const [editedActivityDistance, setEditedActivityDistance] = useState(activity?.distance);
+  const [editedActivityTime, setEditedActivityTime] = useState(activity?.time);
+  const [editedActivityWeight, setEditedActivityWeight] = useState(activity?.weight);
+  const [editedActivitySets, setEditedActivitySets] = useState(activity?.sets);
+  const [editedActivityReps, setEditedActivityReps] = useState(activity?.reps);
 
   // value is highlighted when the input is clicked. allows user easier editing
   const handleFocus = (e) => {
@@ -166,7 +166,7 @@ const Activity = () => {
   return(
     <div style={{ paddingTop: "180px" }}>
       <ActivityContainer className="col-md-8 offset-md-2">
-        <div className="display-6 text-center">{activity.name}</div>
+        <div className="display-6 text-center">{activity?.name}</div>
         <hr className="m-1"/>
 
           <Container className="col-md-8 offset-md-2">
@@ -179,7 +179,7 @@ const Activity = () => {
               </Col>
               <Col>
                 <div>
-                  {activity.type}
+                  {activity?.type}
                 </div>
               </Col>
             </Row>
@@ -189,7 +189,7 @@ const Activity = () => {
               </FieldTitle>
                   
               <div style={{ paddingLeft: "30px"}}>
-                {activity.description}
+                {activity?.description}
               </div>      
             </Row>
 
