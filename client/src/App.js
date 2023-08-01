@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import ProtectedRoute from './routing/ProtectedRoute';
 import AddActivity from './components/AddActivity';
 import Activity from './components/Activity';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/activities/:activityId" element={<Activity />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
