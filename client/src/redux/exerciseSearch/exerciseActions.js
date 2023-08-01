@@ -5,7 +5,7 @@ const apiKey = process.env.REACT_APP_EXERCISE_API_KEY;
 
 export const fetchExercises = createAsyncThunk(
   "/v1/exercises",
-  async ({ name, type, muscle }, { rejectWithValue }) => {
+  async ( { name, type, muscle, offset }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -38,8 +38,8 @@ export const fetchExercises = createAsyncThunk(
         }
       };
 
-      const { data} = await axios.get(
-        `https://api.api-ninjas.com/v1/exercises?${setName()}${setType()}${setMuscle()}`,
+      const { data } = await axios.get(
+        `https://api.api-ninjas.com/v1/exercises?${setName()}${setType()}${setMuscle()}&offset=${offset}`,
         config,
       );
       return data;

@@ -39,7 +39,6 @@ const Home = () => {
         </Col>
         <Col md={9} className="pe-5">
           <SearchBar />
-          <hr />
           <ExerciseResults />
         </Col>
       </Row>

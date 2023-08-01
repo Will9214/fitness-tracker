@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const ExerciseResults = () => {
-
  
   const exercises = useSelector(state => state.exerciseApi.exercises);
 
@@ -22,7 +21,7 @@ const ExerciseResults = () => {
     if (exercises) {
       return exercises.map((exercise, i) => {
         return (
-          <ResultsContainer className="container">
+          <ResultsContainer className="container" key={i}>
             <Fragment>
               <Name><strong>Name:</strong> {exercise.name}</Name>
               <Type><strong>Type:</strong> {exercise.type}</Type>

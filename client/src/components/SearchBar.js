@@ -1,23 +1,93 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchExercises } from "../redux/exerciseSearch/exerciseActions";
+import styled from "styled-components";
 
 const SearchBar = () => {
   // set useState for name, type, muscle, and page?? data
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [muscle, setMuscle] = useState("");
-  const [page, setPage] = useState("1");
+  const [offset, setOffset] = useState(0);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchExercises(name, type, muscle));
-  }, [name, type, muscle]);
+    dispatch(fetchExercises({ name, type, muscle, offset }));
+  }, [name, type, muscle, offset]);
+
+  // calculate current page based on offset value
+  // API returns 10 results per request
+  // API does not give a total count value
+  const currentPage = () => {
+    if (offset === 0) {
+      return 1;
+    } else {
+      return offset / 10 + 1;
+    }
+  };
+
+  
+  // handleNextClick will increase offset by 10 when clicked
+  // pulling in exercises from redux state to get the length of the exercises array
+  // if the length is less than 10 then it has reached the end of the results
+  // no need to go to next page in that case
+  const exercises = useSelector(state => state.exerciseApi.exercises);
+  const handleNextClick = () => {
+    if (exercises.length < 10) {
+      return null;
+    }
+    setOffset(offset + 10);
+  };
+
+  // handlePreviousClick will decrease offset by 10 when clicked unless its at 0
+  const handlePreviousClick = () => {
+    if (offset === 0){
+      return;
+    }
+    setOffset(offset - 10);
+  };
+
+  const handleNameSubmit = e => {
+    e.preventDefault();
+
+    setName(e.target[0].value);
+    setOffset(0);
+
+    e.target[0].value = "";
+
+  };
+
+  const handleTypeSelect = e => {
+    if (e.target.value !== "Choose a Type") {
+      setType(e.target.value);
+      setOffset(0);
+    } else {
+      setType("");
+    }
+  };
+
+  const handleMuscleSelect = e => {
+    if (e.target.value !== "Choose a Muscle") {
+      setMuscle(e.target.value);
+      setOffset(0);
+    } else {
+      setMuscle("");
+    }
+  };
+
+  // clear search will clear the current name, type, muscle, and offset values
+  // Need to figure out how to reset the select dropdowns in this funciton
+  const handleClearSearch = () => {
+    setName("");
+    setType("");
+    setMuscle("");
+    setOffset(0);
+  }
 
   return (
-    <Form className="row">
+    <Form className="row" onSubmit={handleNameSubmit}>
       <Form.Group>
         <Form.Label style={{ fontWeight: "700"}}>Search for Exercise, Choose Exercise Type, and/or Choose Muscle then hit Enter</Form.Label>
       </Form.Group>
@@ -26,10 +96,9 @@ const SearchBar = () => {
       </Form.Group>
         
       <Form.Group className="mb-1 col-md-3">
-        <Form.Select>
+        <Form.Select onChange={handleTypeSelect}>
           <option>Choose a Type</option>
           <option>Cardio</option>
-          <option>Olympic Weightlifting</option>
           <option>Plyometrics</option>
           <option>Powerlifting</option>
           <option>Strength</option>
@@ -39,7 +108,7 @@ const SearchBar = () => {
       </Form.Group>
 
       <Form.Group className="mb-1 col-md-3">
-        <Form.Select>
+        <Form.Select defaultValue="Choose a Muscle" onChange={handleMuscleSelect}>
           <option>Choose a Muscle</option>
           <option>Abdominals</option>
           <option>Abductors</option>
@@ -59,9 +128,36 @@ const SearchBar = () => {
           <option>Triceps</option>
         </Form.Select>
       </Form.Group>
+      <div className="d-flex justify-content-between mt-2">
+        <Button onClick={handlePreviousClick}>Previous</Button>
+        
+        {/* This needs to be cleaned up at some point. Maybe add columns
+        instead of d-flex justify-content-between */}
+        {name || type || muscle ? (
+          <Fragment>
+            <div>
+              <strong>Current Search:</strong> Name - {name ? name: "Any"}, Type - {type ? type : "Any"}, Muscle - {muscle ? muscle : "Any"}
+            </div>
+
+            {/* ClearSearch is not resetting the select components. Need
+            to figure that out */}
+            <ClearSearch onClick={handleClearSearch}>Clear Search</ClearSearch>
+          </Fragment>
+        ) : (null)}
+        <h5>Page: {currentPage()}</h5>
+        <Button onClick={handleNextClick}>Next</Button>
+      </div>
     </Form>
   )
 
 };
 
 export default SearchBar;
+
+const ClearSearch = styled.div`
+  font-weight: 700;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
