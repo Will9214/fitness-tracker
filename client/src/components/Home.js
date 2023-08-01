@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import ShowActivities from "./ShowActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
+import SearchBar from "./SearchBar";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
@@ -30,12 +31,16 @@ const Home = () => {
           </Col>
         </Row>
       </Container> 
-
-      <Col md={3} className="ps-5">
-
-        <ShowActivities />
-          
-      </Col>
+      
+      <Row>
+        <Col md={3} className="ps-5">
+          <ShowActivities />
+        </Col>
+        <Col md={9} className="pe-5">
+          <SearchBar />
+        </Col>
+      </Row>
+     
 
     </HomeContainer>
   )
