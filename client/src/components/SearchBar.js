@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { Form, Button, Overlay } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExercises } from "../redux/exerciseSearch/exerciseActions";
 import styled from "styled-components";
@@ -34,8 +34,15 @@ const SearchBar = () => {
   // if the length is less than 10 then it has reached the end of the results
   // no need to go to next page in that case
   const exercises = useSelector(state => state.exerciseApi.exercises);
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
   const handleNextClick = () => {
     if (exercises.length < 10) {
+      setShow(!show);
+      setTimeout(() => {
+        setShow(false);
+      }, "3000");
       return null;
     }
     setOffset(offset + 10);
@@ -128,7 +135,7 @@ const SearchBar = () => {
           <option>Triceps</option>
         </Form.Select>
       </Form.Group>
-      <div className="d-flex justify-content-between mt-2">
+      <div className="d-flex justify-content-between mt-2 align-items-center">
         <Button onClick={handlePreviousClick}>Previous</Button>
         
         {/* This needs to be cleaned up at some point. Maybe add columns
@@ -144,8 +151,11 @@ const SearchBar = () => {
             <ClearSearch onClick={handleClearSearch}>Clear Search</ClearSearch>
           </Fragment>
         ) : (null)}
-        <h5>Page: {currentPage()}</h5>
-        <Button onClick={handleNextClick}>Next</Button>
+        <div style={{ fontSize: "1.3rem", fontWeight: "700"}}>Page: {currentPage()}</div>
+        <Button onClick={handleNextClick} ref={target}>Next</Button>
+        <Overlay target={target.current} show={show} placement="left">
+          <div style={{ position: "absolute", backgroundColor: "blue", padding: "2px 10px", color: "white", borderRadius: 3 }}>No More Results!</div>
+        </Overlay>
       </div>
     </Form>
   )
