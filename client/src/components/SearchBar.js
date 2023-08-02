@@ -3,6 +3,7 @@ import { Form, Button, Overlay } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExercises } from "../redux/exerciseSearch/exerciseActions";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   // set useState for name, type, muscle, and page?? data
@@ -12,6 +13,7 @@ const SearchBar = () => {
   const [offset, setOffset] = useState(0);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchExercises({ name, type, muscle, offset }));
@@ -93,11 +95,19 @@ const SearchBar = () => {
     setOffset(0);
   }
 
+  const handleHomeClick = () => {
+    navigate("/home");
+  };
+
   return (
     <Form className="row" onSubmit={handleNameSubmit}>
-      <Form.Group>
-        <Form.Label style={{ fontWeight: "700"}}>Search for Exercise, Choose Exercise Type, and/or Choose Muscle then hit Enter</Form.Label>
+      <Form.Group className="col-md-11">
+        <Form.Label style={{ fontWeight: "700", fontSize: "1.5rem"}}>Search for Exercise and press Enter, Choose Exercise Type, and/or Choose Muscle.</Form.Label>
+        <Form.Label>If you find an exercise you like, click the plus symbol in the top, right corner of the individual results to add it to your Activity List.</Form.Label>
       </Form.Group>
+      <div className="col-md-1">
+        <Button onClick={handleHomeClick}>Home</Button>
+      </div>
       <Form.Group className="mb-1 col-md-6">
         <Form.Control type="text" placeholder="Search Exercise" />
       </Form.Group>

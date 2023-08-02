@@ -17,7 +17,7 @@ const ExerciseResults = () => {
          {exercises?.map((exercise, i) => (
           <Exercise 
             key={i} 
-            id={exercise._id} 
+            id={i} 
             name={exercise.name} 
             type={exercise.type}
             muscle={exercise.muscle}

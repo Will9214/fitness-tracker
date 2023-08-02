@@ -1,16 +1,34 @@
 import React, { useState, Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Placeholder } from "react-bootstrap";
+import { Placeholder, Col, Button, Row } from "react-bootstrap";
+import { addActivityThunk } from "../redux/activities/activityActions";
+import { useNavigate } from "react-router-dom";
 
 const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions }) => {
 
   const { loading } = useSelector(state => state.exerciseApi);
+  const { userId } = useSelector(state => state.auth.user);
 
   const [showMore, setShowMore] = useState(false);
   const handleShowMoreClick = () => setShowMore(true);
   const handleShowLessClick = () => setShowMore(false);
-  // const [isLoading, setLoading] = useState(loading);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+
+  const handleAddExerciseClick = () => {
+    const data = {
+      name: name,
+      type: type,
+      description: instructions,
+    };
+
+    dispatch(addActivityThunk({ data, userId }));
+    navigate("/home");
+  };
+
 
   return (
     <Fragment>
@@ -37,6 +55,8 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
       </ResultsContainer>
     ) : (
       <ResultsContainer className="container">
+        <Row>
+        <Col md={11}>
         <Fragment>
           <Name><strong>Name:</strong> {name}</Name>
           <Type><strong>Type:</strong> {type}</Type>
@@ -55,6 +75,11 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
           </Fragment>
         )}
         </Fragment>
+        </Col>
+        <Col md={1}>
+          <i id={id} onClick={handleAddExerciseClick} name={name} type={type} description={instructions} className="fa-regular fa-2x mt-2">&#xf0fe;</i>
+        </Col>
+        </Row>
       </ResultsContainer>
     )}
     </Fragment>

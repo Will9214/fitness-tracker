@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +21,10 @@ const Home = () => {
     }
   }, [userToken, dispatch] )
 
+  const handleSearchClick = () => {
+    navigate("/search_exercise");
+  };
+
   return (
     <HomeContainer>
       <Container>
@@ -38,8 +42,7 @@ const Home = () => {
           <ShowActivities />
         </Col>
         <Col md={9} className="pe-5">
-          <SearchBar />
-          <ExerciseResults />
+          <Button onClick={handleSearchClick}>Search for an Exercise</Button>
         </Col>
       </Row>
      

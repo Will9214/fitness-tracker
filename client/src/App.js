@@ -7,6 +7,7 @@ import ProtectedRoute from './routing/ProtectedRoute';
 import AddActivity from './components/AddActivity';
 import Activity from './components/Activity';
 import Footer from './components/Footer';
+import SearchExercise from './components/SearchExersice';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/add_activity" element={<AddActivity />} />
             <Route path="/activities/:activityId" element={<Activity />} />
+            <Route path="/search_exercise" element={<SearchExercise />} />
           </Route>
         </Routes>
         <Footer />
