@@ -103,7 +103,7 @@ const SearchBar = () => {
       </Form.Group>
         
       <Form.Group className="mb-1 col-md-3">
-        <Form.Select onChange={handleTypeSelect}>
+        <Form.Select placeholder="Choose a Type" value={type} onChange={handleTypeSelect}>
           <option>Choose a Type</option>
           <option>Cardio</option>
           <option>Plyometrics</option>
@@ -115,7 +115,7 @@ const SearchBar = () => {
       </Form.Group>
 
       <Form.Group className="mb-1 col-md-3">
-        <Form.Select defaultValue="Choose a Muscle" onChange={handleMuscleSelect}>
+        <Form.Select placeholder="Choose a Muscle" value={muscle} onChange={handleMuscleSelect}>
           <option>Choose a Muscle</option>
           <option>Abdominals</option>
           <option>Abductors</option>
