@@ -15,10 +15,14 @@ const Activity = () => {
 
   const { activities } = useSelector(state => state.userActivities);
 
-  // Trying to get state to refetch on page refresh
-  if (activities.length === 0) {
-    dispatch(getUserActivities());
-  }
+  // Fetch userActivities on page refresh
+  
+  useEffect(() => {
+    if (activities.length === 0) {
+      dispatch(getUserActivities());
+    } 
+  });
+  
 
   const location = useLocation();
   const path = matchPath("/activities/:activityId", location.pathname);

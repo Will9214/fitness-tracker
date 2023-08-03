@@ -151,7 +151,7 @@ const SearchBar = () => {
         {/* This needs to be cleaned up at some point. Maybe add columns
         instead of d-flex justify-content-between */}
         {name || type || muscle ? (
-          <Fragment>
+          <>
             <div>
               <strong>Current Search:</strong> Name - {name ? name: "Any"}, Type - {type ? type : "Any"}, Muscle - {muscle ? muscle : "Any"}
             </div>
@@ -159,7 +159,7 @@ const SearchBar = () => {
             {/* ClearSearch is not resetting the select components. Need
             to figure that out */}
             <ClearSearch onClick={handleClearSearch}>Clear Search</ClearSearch>
-          </Fragment>
+          </>
         ) : (null)}
         <div style={{ fontSize: "1.3rem", fontWeight: "700"}}>Page: {currentPage()}</div>
         <Button onClick={handleNextClick} ref={target}>Next</Button>

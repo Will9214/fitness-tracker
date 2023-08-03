@@ -57,13 +57,13 @@ const ShowActivities = () => {
 
   return (
     <ActivitiesContainer>
-      <div className="display-6 text-center">Activities</div>
+      <div className="display-6 text-center">Activity List</div>
       <hr className="m-1"/>
 
       {renderUserActivities()}
 
       <Container className="text-center mt-2 mb-3">
-        <Button onClick={handleAddActivityClick}>Add Activity</Button>
+        <Button onClick={handleAddActivityClick}>Create Activity</Button>
       </Container>
       
     </ActivitiesContainer>
