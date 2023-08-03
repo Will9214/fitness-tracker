@@ -29,7 +29,7 @@ const Activity = () => {
 
   // Not going to do ternary operator for this because there might be more activity types in the future
   const renderActivityDataByType = () => {
-    if (activity?.type === "Strength") {
+    if (activity?.type.toLowerCase() === "strength") {
       return (
         <Fragment>
           <Row> 
