@@ -6,7 +6,7 @@ const addActivity = async function(req, res, next) {
   const { name, type, description, time, distance, weight, sets, reps } = req.body.data;
 
   User.findById(userId)
-    .then((user) => {
+    .then((user) => {  
       const activity = new Activity({
         name: name,
         type: type,
@@ -46,8 +46,6 @@ const updateActivity = async function(req, res, next) {
     reps: editedActivityReps
   });
   activity.save();
-
-console.log(activity);
 
   res.status(200).send(activity);
 };

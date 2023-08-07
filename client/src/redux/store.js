@@ -3,18 +3,19 @@ import AuthReducer from "./auth/authSlice";
 import { authApi } from "./auth/authService";
 import ActivityReducer from "./activities/activitySlice";
 import ExerciseApiReducer from "./exerciseSearch/exerciseSlice";
+import WorkoutReducer from "./workouts/workoutSlice";
 
 
 const store =  configureStore({
   reducer: {
     auth: AuthReducer,
-    [authApi.reducerPath]: authApi.reducer,
+    // [authApi.reducerPath]: authApi.reducer,
     userActivities: ActivityReducer,
     exerciseApi: ExerciseApiReducer,
-    // userWorkouts: WorkoutReducer,
+    userWorkouts: WorkoutReducer,
     // userObjectives: ObjectiveReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });
 
 export default store;

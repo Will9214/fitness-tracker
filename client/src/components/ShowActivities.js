@@ -43,8 +43,6 @@ const ShowActivities = () => {
                 <CloseButton id={activity._id} onClick={handleActivityDeleteClick} aria-label="remove"/>
               </Col>
             </Row>
-            
-            
           </ActivityContainer>
         </div>
       ))
@@ -65,7 +63,6 @@ const ShowActivities = () => {
       <Container className="text-center mt-2 mb-3">
         <Button onClick={handleAddActivityClick}>Create Activity</Button>
       </Container>
-      
     </ActivitiesContainer>
   )
 };

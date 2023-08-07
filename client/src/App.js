@@ -8,6 +8,9 @@ import AddActivity from './components/AddActivity';
 import Activity from './components/Activity';
 import Footer from './components/Footer';
 import SearchExercise from './components/SearchExersice';
+import AddWorkout from './components/AddWorkout';
+import AddActivitiesToWorkout from './components/AddActivitiesToWorkout';
+import Workout from './components/Workout';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
             <Route path="/add_activity" element={<AddActivity />} />
             <Route path="/activities/:activityId" element={<Activity />} />
             <Route path="/search_exercise" element={<SearchExercise />} />
+            <Route path="/add_workout" element={<AddWorkout />} />
+            <Route path="/add_activities_to_workout/:workoutId" element={<AddActivitiesToWorkout />} />
+            <Route path="/workouts/:workoutId" element={<Workout />} />
           </Route>
         </Routes>
         <Footer />

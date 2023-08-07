@@ -25,6 +25,8 @@ module.exports = function(app) {
   app.get("/api/getUserWorkouts", requireAuth, Workout.getUserWorkouts)
   app.post("/api/updateWorkout", requireAuth, Workout.updateWorkout)
   app.delete("/api/removeWorkout", requireAuth, Workout.removeWorkout)
+  app.post("/api/addActivityToWorkout", requireAuth, Workout.addActivityToWorkout)
+  app.post("/api/deleteActivityFromWorkout", requireAuth, Workout.deleteActivityFromWorkout)
 
   // objectives
   app.post("/api/addObjective", requireAuth, Objective.addObjective)

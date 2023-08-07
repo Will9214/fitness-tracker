@@ -16,7 +16,6 @@ const Activity = () => {
   const { activities } = useSelector(state => state.userActivities);
 
   // Fetch userActivities on page refresh
-  
   useEffect(() => {
     if (activities.length === 0) {
       dispatch(getUserActivities());

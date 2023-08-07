@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ShowActivities from "./ShowActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
 import ShowWorkouts from "./ShowWorkouts";
+import { getUserWorkouts } from "../redux/workouts/workoutActions";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
@@ -17,6 +18,7 @@ const Home = () => {
   useEffect(() => {
     if (userToken) {
       dispatch(getUserActivities())
+      dispatch(getUserWorkouts());
     }
   }, [userToken, dispatch] )
 
