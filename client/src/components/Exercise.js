@@ -21,7 +21,7 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
   const handleAddExerciseClick = () => {
     const data = {
       name: name,
-      type: type,
+      type: type === "cardio" ? "Cardio" : "Strength",
       description: instructions,
     };
 
