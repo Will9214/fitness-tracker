@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getUserWorkouts } from "../redux/workouts/workoutActions";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Accordion, Table } from "react-bootstrap";
 
 // WILL NEED TO ADD:
 // activities that are part of the workout. Accordion style
@@ -37,7 +37,66 @@ const Workout = () => {
 
   const handleAddRemoveActivitiesClick = () => {
     navigate(`/add_activities_to_workout/${workoutId}`)
-  }
+  };
+
+  
+
+  const renderWorkoutActivities = () => {
+    if (workout.activities?.length > 0) {
+      return workout.activities.map((activity) => {
+        return (
+          <Accordion.Item eventKey={activity._id}>
+            <Accordion.Header>{activity.name}</Accordion.Header>
+            <Accordion.Body>
+              { activity.type.toLowerCase() === "strength" ? (
+                <Table bordered>
+                  <thead>
+                    <tr>
+                      <th>Weight</th>
+                      <th>Sets</th>
+                      <th>Reps</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{activity.weight}</td>
+                      <td>{activity.sets}</td>
+                      <td>{activity.reps}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              ) : (
+                <Table bordered>
+                  <thead>
+                    <tr>
+                      <th>Distance</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{activity.distance}</td>
+                      <td>{activity.time}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              )}
+             
+              <div>{activity.description}</div>
+            </Accordion.Body>
+          </Accordion.Item>
+      )}   
+
+        )
+    } else {
+      return (
+        <>
+          <h4>There are no Activities in this Workout.</h4>
+          <h6>Add Activities below using the Add/Remove Activities Button</h6>
+        </>
+        )
+    }
+  };
 
   return (
     <div style={{ paddingTop: "180px" }}>
@@ -45,8 +104,11 @@ const Workout = () => {
         <div className="display-6 text-center">{workout?.name}</div>
         <hr className="m-1" />
 
-
         <Container className="col-md-8 offset-md-2">
+          
+          <Accordion>
+            {renderWorkoutActivities()}
+          </Accordion>
 
           <Container className="text-center mt-2 mb-3">
             <Row>

@@ -88,7 +88,7 @@ const Activity = () => {
           <hr />
         </Fragment>
       );
-    } else if (activity?.type === "Cardio") {
+    } else if (activity?.type.toLowerCase() === "cardio") {
       return (
         <Fragment>
           <Row>
