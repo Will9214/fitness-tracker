@@ -53,6 +53,4 @@ export const workoutSlice = createSlice({
   },
 });
 
-
-
 export default workoutSlice.reducer;

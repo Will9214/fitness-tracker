@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 import Exercise from "./Exercise";
 
+// displays all exercise results, 10 results at a time
 const ExerciseResults = () => {
   const { exercises } = useSelector(state => state.exerciseApi);
     

@@ -5,16 +5,16 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUserActivities } from "../redux/activities/activityActions";
 import { addWorkoutThunk } from "../redux/workouts/workoutActions";
 
-
+// object schema validation
 const AddWorkoutSchema = Yup.object().shape({
   name: Yup.string().required(),
-  
 });
 
+// displays a form to create a new workout
 const AddWorkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const AddWorkout = () => {
   const { activities } = useSelector(state => state.userActivities);
   const { userId } = useSelector(state => state.auth.user);
 
+  // setup form validation
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(AddWorkoutSchema)
   });
@@ -33,11 +34,13 @@ const AddWorkout = () => {
     } 
   });
 
+  // dispatches add workout action when form is submitted and navigates to home
   const handleWorkoutFormSubmit = (data) => {
     dispatch(addWorkoutThunk({ data, userId }));
     navigate("/home");
   };
 
+  // back button navigates home
   const handleBackClick = () => {
     navigate("/home");
   };
@@ -85,27 +88,4 @@ const FormContainer = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   padding: 20px;
-`;
-
-const SelectActivities = styled.div`
-  border: 1px solid black;
-  height: 186px;
-  overflow-y: auto;
-`;
-
-const PlusButton = styled.div`
-  cursor: pointer;
-  &:hover {
-    background: grey;
-  }
-`;
-
-const AddedActivities = styled.div`
- border: 1px solid black;
- height: 186px;
-`;
-
-const ActivityContainer = styled.div`
-  border: 1px solid black;
-  padding: 6px;
 `;

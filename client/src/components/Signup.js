@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -8,19 +8,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../redux/auth/authActions";
 
+// object schema validation
 const userSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required(),
 });
 
+// displays signup screen
 const Signup = () => {
 
-  const { loading, user, error, success } = useSelector((state) => state.auth);
+  const { user, error, success } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
+  // form validation
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
   });
@@ -33,10 +35,12 @@ const Signup = () => {
     if (user) navigate("/home")
   }, [navigate, user, success]);
 
+  // dispatches signup action when form is submitted
   const handleFormSubmit = (data) => {
     dispatch(signUp(data));
   };
 
+  // displays message if error occurs
   const renderSubmitError = () => {
     if (error) {
       return (
@@ -49,10 +53,12 @@ const Signup = () => {
     }
   };
 
+  // navigates to login screen when clicked
   const handleBackButton = () => {
     navigate("/");
   };
 
+  // function to capitalize first letter of a string
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -90,7 +96,6 @@ const Signup = () => {
       </Container>
     </SignUpContainer>  
   )
-
 };
 
 export default Signup;

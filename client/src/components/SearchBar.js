@@ -1,12 +1,13 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Form, Button, Overlay } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExercises } from "../redux/exerciseSearch/exerciseActions";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+// displays search bar for third party exercise API
 const SearchBar = () => {
-  // set useState for name, type, muscle, and page?? data
+  // set useState for name, type, muscle, and offset data
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [muscle, setMuscle] = useState("");
@@ -15,6 +16,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // dispatches fetchExercises action whenever name, type, muscle, or offset has changed
   useEffect(() => {
     dispatch(fetchExercises({ name, type, muscle, offset }));
   }, [name, type, muscle, offset]);
@@ -30,11 +32,11 @@ const SearchBar = () => {
     }
   };
 
-  
   // handleNextClick will increase offset by 10 when clicked
   // pulling in exercises from redux state to get the length of the exercises array
   // if the length is less than 10 then it has reached the end of the results
   // no need to go to next page in that case
+  // this does not take care of an instance where the results happen to end with exactly 10 results
   const exercises = useSelector(state => state.exerciseApi.exercises);
   const [show, setShow] = useState(false);
   const target = useRef(null);
@@ -58,6 +60,7 @@ const SearchBar = () => {
     setOffset(offset - 10);
   };
 
+  // setName and setOffset when name form is submitted
   const handleNameSubmit = e => {
     e.preventDefault();
 
@@ -65,9 +68,9 @@ const SearchBar = () => {
     setOffset(0);
 
     e.target[0].value = "";
-
   };
 
+  // setType value when a type has been selected/changed
   const handleTypeSelect = e => {
     if (e.target.value !== "Choose a Type") {
       setType(e.target.value);
@@ -77,6 +80,7 @@ const SearchBar = () => {
     }
   };
 
+  // setMuscle value when a type has been selected/changed
   const handleMuscleSelect = e => {
     if (e.target.value !== "Choose a Muscle") {
       setMuscle(e.target.value);
@@ -86,8 +90,7 @@ const SearchBar = () => {
     }
   };
 
-  // clear search will clear the current name, type, muscle, and offset values
-  // Need to figure out how to reset the select dropdowns in this funciton
+  // clear search will clear the current name, type, muscle, offset values, and search bar
   const handleClearSearch = () => {
     setName("");
     setType("");
@@ -95,6 +98,7 @@ const SearchBar = () => {
     setOffset(0);
   }
 
+  // home button will navigate to home
   const handleHomeClick = () => {
     navigate("/home");
   };
@@ -156,8 +160,6 @@ const SearchBar = () => {
               <strong>Current Search:</strong> Name - {name ? name: "Any"}, Type - {type ? type : "Any"}, Muscle - {muscle ? muscle : "Any"}
             </div>
 
-            {/* ClearSearch is not resetting the select components. Need
-            to figure that out */}
             <ClearSearch onClick={handleClearSearch}>Clear Search</ClearSearch>
           </>
         ) : (null)}

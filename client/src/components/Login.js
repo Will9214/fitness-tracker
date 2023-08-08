@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { signIn } from "../redux/auth/authActions";
 
-
+// object schema validation
 const userSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required(),
 })
 
+// displays login screen with form for user login
 const Login = () => {
 
   const { loading, user, error } = useSelector((state) => state.auth);
@@ -25,18 +26,19 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // navigate to home screen if user is signed in
   useEffect(() => {
     if (user) {
       navigate("/home")
     }
   }, [navigate, user]);
 
+  // dispatches sign in action when login form is submitted
   const handleFormSubmit = (data) => {
-    dispatch(signIn(data
-    // , () => {navigate("/home")}
-    ));
+    dispatch(signIn(data));
   };
 
+  // displays message if login is invalid
   const renderSubmitError = () => {
     if (error === 401) {
       return (
@@ -49,10 +51,12 @@ const Login = () => {
     }
   };
 
+  // navigates to sign up screen
   const handleSignUpClick = () => {
     navigate("/signup");
   };
 
+  // function to capitalize first letter of a string
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };

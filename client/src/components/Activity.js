@@ -1,18 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Button, Form, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserActivities } from "../redux/activities/activityActions";
 import { updateActivity } from "../redux/activities/activityActions";
 import { updateActivityReducer } from "../redux/activities/activitySlice";
 
-
+// Displays individual Activity info when clicked from the activity list
 const Activity = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-
   const { activities } = useSelector(state => state.userActivities);
 
   // Fetch userActivities on page refresh
@@ -22,7 +21,7 @@ const Activity = () => {
     } 
   });
   
-
+  // find activity from activityId given by the path parameters
   const location = useLocation();
   const path = matchPath("/activities/:activityId", location.pathname);
   const pathId = path.params.activityId;
@@ -31,10 +30,11 @@ const Activity = () => {
   const activityId = activity?._id;
 
   // Not going to do ternary operator for this because there might be more activity types in the future
+  // Display certain details of the activity depending on the activity type
   const renderActivityDataByType = () => {
     if (activity?.type.toLowerCase() === "strength") {
       return (
-        <Fragment>
+        <>
           <Row> 
             <Col className="col-md-4">
               <Row>
@@ -86,11 +86,11 @@ const Activity = () => {
             </Col>
           </Row>
           <hr />
-        </Fragment>
+        </>
       );
     } else if (activity?.type.toLowerCase() === "cardio") {
       return (
-        <Fragment>
+        <>
           <Row>
             <Col className="col-md-6">
               <Row>
@@ -125,7 +125,7 @@ const Activity = () => {
             </Col>
           </Row>
           <hr />
-        </Fragment>
+        </>
       );
     }
   };
@@ -149,7 +149,7 @@ const Activity = () => {
   const [editedActivitySets, setEditedActivitySets] = useState(activity?.sets);
   const [editedActivityReps, setEditedActivityReps] = useState(activity?.reps);
 
-  // value is highlighted when the input is clicked. allows user easier editing
+  // value is highlighted when the input is clicked. allows easier editing for user
   const handleFocus = (e) => {
     e.currentTarget.select();
   };
@@ -158,7 +158,7 @@ const Activity = () => {
     navigate("/home");
   };
 
-  // dispatch updateActivity with the updated values
+  // dispatch updateActivity with the updated values when Save Changes button is clicked
   const handleEditedActivitySave = () => {
     dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps}));
     dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps }));

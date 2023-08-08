@@ -17,10 +17,21 @@ export const activitySlice = createSlice({
       activity.weight = action.payload.editedActivityWeight;
       activity.sets = action.payload.editedActivitySets;
       activity.reps = action.payload.editedActivityReps;
-      
     }
   },
   extraReducers: async (builder) => {
+    builder.addCase(addActivityThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addActivityThunk.fulfilled, (state) => {
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(addActivityThunk.rejected, (state, action) => {
+      console.log("rejected addActivityThunk");
+      state.loading = false;
+      state.error = action.error.message || null;
+    });
     builder.addCase(getUserActivities.pending, (state) => {
       state.loading = true;
     });
@@ -51,7 +62,7 @@ export const activitySlice = createSlice({
     builder.addCase(updateActivity.pending, (state) =>{
       state.loading = true;
     });
-    builder.addCase(updateActivity.fulfilled, (state, action) => {
+    builder.addCase(updateActivity.fulfilled, (state) => {
       
       // I couldn't get this code working down here so I just made a separate reducer above, which will also require a separate dispatch in the activity component
 
@@ -70,7 +81,6 @@ export const activitySlice = createSlice({
       state.loading = false;
       state.error = action.error.message || null;
     });
-
   },
 });
 

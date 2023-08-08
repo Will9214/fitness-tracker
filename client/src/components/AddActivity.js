@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { addActivityThunk } from "../redux/activities/activityActions";
 import { useNavigate } from "react-router-dom";
-import { render } from "react-dom";
 
+// object schema validation
 const AddActivitySchema = Yup.object().shape({
   name: Yup.string().required(),
   type: Yup.string().required(),
@@ -20,10 +20,12 @@ const AddActivitySchema = Yup.object().shape({
   reps: Yup.number(),
 });
 
+// Displays a form to create a new activity
 const AddActivity = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // form validation 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(AddActivitySchema)
   });
@@ -31,11 +33,13 @@ const AddActivity = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { userId } = useSelector((state) => state.auth.user);
 
+  // dispatches add activity action when form is submitted
   const handleActivityFormSubmit = (data) => {
     dispatch(addActivityThunk({ data, userId, userToken }));
     navigate("/home");
   };
 
+  // back button navigates to home
   const handleBackClick = () => {
     navigate("/home");
   };

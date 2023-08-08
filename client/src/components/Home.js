@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +9,14 @@ import { getUserActivities } from "../redux/activities/activityActions";
 import ShowWorkouts from "./ShowWorkouts";
 import { getUserWorkouts } from "../redux/workouts/workoutActions";
 
+// displays home screen
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
   const userToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // fetches userActivities and userWorkouts
   useEffect(() => {
     if (userToken) {
       dispatch(getUserActivities())
@@ -22,6 +24,7 @@ const Home = () => {
     }
   }, [userToken, dispatch] )
 
+  // navigates to search for exercise screen
   const handleSearchClick = () => {
     navigate("/search_exercise");
   };
@@ -49,11 +52,9 @@ const Home = () => {
           <ShowWorkouts />
         </Col>
       </Row>
-     
-
     </HomeContainer>
   )
-}
+};
 
 export default Home;
 

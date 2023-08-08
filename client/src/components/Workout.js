@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ import { Button, Col, Container, Row, Accordion, Table } from "react-bootstrap";
 // add an edit activities button
 // add name edit if name is clicked on
 
+// displays individual workout and the activities associated with the workout
 const Workout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Workout = () => {
     }
   });
 
+  // workout from workoutId given in path parameters
   const location = useLocation();
   const path = matchPath("/workouts/:workoutId", location.pathname);
   const pathId = path.params.workoutId;
@@ -31,16 +33,17 @@ const Workout = () => {
 
   const workoutId = workout?._id;
   
+  // navigates to home when clicked
   const handleBackClick = () => {
     navigate("/home");
   };
 
+  // navigates to add activities to workout screen
   const handleAddRemoveActivitiesClick = () => {
     navigate(`/add_activities_to_workout/${workoutId}`)
   };
 
-  
-
+  // renders the activities that are associated with the particular workout
   const renderWorkoutActivities = () => {
     if (workout.activities?.length > 0) {
       return workout.activities.map((activity) => {
@@ -81,13 +84,11 @@ const Workout = () => {
                   </tbody>
                 </Table>
               )}
-             
               <div>{activity.description}</div>
             </Accordion.Body>
           </Accordion.Item>
-      )}   
-
         )
+      })
     } else {
       return (
         <>
@@ -133,9 +134,4 @@ const WorkoutContainer = styled.div`
   border: 1px solid black;
   height: auto;
   border-radius: 10px;
-`;
-
-const FieldTitle = styled.div`
-  text-decoration: underline;
-  font-weight: 700;
 `;

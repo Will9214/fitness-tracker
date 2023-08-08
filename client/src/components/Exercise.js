@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Placeholder, Col, Button, Row } from "react-bootstrap";
+import { Placeholder, Col, Row } from "react-bootstrap";
 import { addActivityThunk } from "../redux/activities/activityActions";
 import { useNavigate } from "react-router-dom";
 
+// displays individual exercises results from the exercise search
 const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions }) => {
 
   const { loading } = useSelector(state => state.exerciseApi);
@@ -17,7 +18,8 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-
+  // dispatches add activity action to add a searched exercise as an activity
+  // the different exercise types are converted to one of two activity types, 'strength' or 'cardio'
   const handleAddExerciseClick = () => {
     const data = {
       name: name,
@@ -29,9 +31,9 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
     navigate("/home");
   };
 
-
+  // will display placeholder components while results are still loading
   return (
-    <Fragment>
+    <>
     {loading ? (
       <ResultsContainer className="container">
         <Placeholder as={Name} animation="glow">
@@ -57,24 +59,24 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
       <ResultsContainer className="container">
         <Row>
         <Col md={11}>
-        <Fragment>
+        <>
           <Name><strong>Name:</strong> {name}</Name>
           <Type><strong>Type:</strong> {type}</Type>
           <Muscle><strong>Muscle:</strong> {muscle}</Muscle>
           <Equipment><strong>Equipment:</strong> {equipment}</Equipment>
           <Difficulty><strong>Difficulty:</strong> {difficulty}</Difficulty>
           {showMore ? (
-          <Fragment>
+          <>
             <FullInstructions><strong>Instructions:</strong> {instructions}</FullInstructions>
             <ShowLess onClick={handleShowLessClick}>...Show Less</ShowLess>
-          </Fragment>
+          </>
           ) : (
-          <Fragment>
+          <>
             <TruncatedInstructions><strong>Instructions:</strong> {instructions}</TruncatedInstructions>
             <ShowMore onClick={handleShowMoreClick}>...Show More</ShowMore>
-          </Fragment>
+          </>
         )}
-        </Fragment>
+        </>
         </Col>
         <Col md={1}>
           <i id={id} onClick={handleAddExerciseClick} name={name} type={type} description={instructions} className="fa-regular fa-2x mt-2">&#xf0fe;</i>
@@ -82,10 +84,8 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
         </Row>
       </ResultsContainer>
     )}
-    </Fragment>
-
+    </>
   )
-
 };
 
 export default Exercise;

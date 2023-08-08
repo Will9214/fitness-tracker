@@ -53,11 +53,6 @@ export const removeActivityThunk = createAsyncThunk(
   "/api/removeActivity",
   async ({ activityId }, { rejectWithValue }) => {
     try {
-      const config = {
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
-        }
-      }
       const { data } = await axios.delete(
         `${backendURL}/api/removeActivity`,
         { data: { activityId: activityId },
@@ -95,5 +90,3 @@ export const updateActivity = createAsyncThunk(
     }
   }
 );
-
-

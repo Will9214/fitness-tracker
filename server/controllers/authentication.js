@@ -51,15 +51,9 @@ const signIn = async function (req, res, next) {
 };
 
 const getCurrentUser = async function(req, res) {   
-  // const activities = await Activity.find({ user: req.user._id })
-  
   const user = {
     userId: req.user._id,
     username: req.user.username,
-    // activities: activities,
-    // workouts
-    // objectives
-    // groups
   };
 
   const userToken = tokenForUser(req.user);

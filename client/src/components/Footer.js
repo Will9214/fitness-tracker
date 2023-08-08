@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// gives space at the bottom of the view window
 const Footer = () => {
   return (
     <FooterContainer></FooterContainer>

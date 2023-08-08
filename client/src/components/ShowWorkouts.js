@@ -1,16 +1,16 @@
-import React from "react";
 import { Button, CloseButton, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+// displays user's workouts in a list
 const ShowWorkouts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { workouts } = useSelector(state => state.userWorkouts);
 
-
+  // navigates to individual workout's screen when workout is clicked
   const handleWorkoutClick = (e) => {
     if (e.target.ariaLabel !== "remove") {
       const workoutId = e.currentTarget.id;
@@ -18,14 +18,17 @@ const ShowWorkouts = () => {
     }
   };
 
+  // dispatches delete workout function when clicked
   const handleWorkoutDeleteClick = (e) => {
 
   };
 
+  // navigates to add workout screen when clicked
   const handleAddWorkoutClick = () => {
     navigate("/add_workout");
   };
 
+  // renders user's workouts
   const renderUserWorkouts = () => {
     if (workouts) {
       return workouts.map((workout) => (

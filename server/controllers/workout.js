@@ -42,7 +42,7 @@ const removeWorkout = async function (req, res, next) {
 };
 
 const addActivityToWorkout = async function (req, res, next) {
-  const { userId, workoutId, activityId } = req.body;
+  const { workoutId, activityId } = req.body;
 
   const workout = await Workout.findById(workoutId);
   const activity = await Activity.findById(activityId);
