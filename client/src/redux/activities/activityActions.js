@@ -40,7 +40,6 @@ export const getUserActivities = createAsyncThunk(
         `${backendURL}/api/getUserActivities`,
         config
       );
-      console.log(data, "activities");
       
       return data;
     } catch (error) {

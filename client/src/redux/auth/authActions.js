@@ -65,7 +65,6 @@ export const getUser = createAsyncThunk(
         `${backendURL}/auth/getCurrentUser`,
         config
       );
-      console.log(data, "user");
       localStorage.setItem("userToken", data.userToken);
 
       return data;
