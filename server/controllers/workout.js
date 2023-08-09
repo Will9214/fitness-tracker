@@ -95,6 +95,12 @@ console.log(req.body);
     })
 };
 
+const getUserCompletedWorkouts = async function (req, res, next) {
+  const completedWorkouts = await CompletedWorkout.find({ user: req.user._id });
+
+  res.send({ completedWorkouts });
+}
+
 module.exports = {
   addWorkout,
   getUserWorkouts,
@@ -103,4 +109,5 @@ module.exports = {
   addActivityToWorkout,
   deleteActivityFromWorkout,
   addCompletedWorkout,
+  getUserCompletedWorkouts,
 }

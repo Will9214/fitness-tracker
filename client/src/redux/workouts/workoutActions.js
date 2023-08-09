@@ -136,3 +136,24 @@ export const addCompletedWorkout = createAsyncThunk(
     }
   }
 );
+
+export const getUserCompletedWorkouts = createAsyncThunk(
+  "/api/getUserCompletedWorkouts",
+  async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`
+        },
+      };
+      const { data } = await axios.get(
+        `${backendURL}/api/getUserCompletedWorkouts`,
+        config
+      );
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+);

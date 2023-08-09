@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addActivityToWorkout, addCompletedWorkout, addWorkoutThunk, deleteActivityFromWorkout, getUserWorkouts, removeWorkoutThunk } from "./workoutActions";
+import { addActivityToWorkout, addCompletedWorkout, addWorkoutThunk, deleteActivityFromWorkout, getUserCompletedWorkouts, getUserWorkouts, removeWorkoutThunk } from "./workoutActions";
 
 export const workoutSlice = createSlice({
   name: "workout",
@@ -86,6 +86,18 @@ export const workoutSlice = createSlice({
       state.error = null;
     });
     builder.addCase(addCompletedWorkout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || null;
+    });
+    builder.addCase(getUserCompletedWorkouts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getUserCompletedWorkouts.fulfilled, (state, action) => {
+      state.completedWorkouts = action.payload.completedWorkouts;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(getUserCompletedWorkouts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || null;
     });

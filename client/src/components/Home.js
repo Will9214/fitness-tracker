@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ShowActivities from "./ShowActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
 import ShowWorkouts from "./ShowWorkouts";
-import { getUserWorkouts } from "../redux/workouts/workoutActions";
+import { getUserCompletedWorkouts, getUserWorkouts } from "../redux/workouts/workoutActions";
 
 // displays home screen
 const Home = () => {
@@ -21,6 +21,7 @@ const Home = () => {
     if (userToken) {
       dispatch(getUserActivities())
       dispatch(getUserWorkouts());
+      dispatch(getUserCompletedWorkouts());
     }
   }, [userToken, dispatch] )
 

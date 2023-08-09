@@ -15,7 +15,7 @@ const Workout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { workouts, loading } = useSelector(state => state.userWorkouts);
+  const { workouts, loading, completedWorkouts } = useSelector(state => state.userWorkouts);
 
   // Fetch userWorkouts on page refresh
   useEffect(() => {
