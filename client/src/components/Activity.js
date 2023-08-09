@@ -16,6 +16,8 @@ const Activity = () => {
 
   // Fetch userActivities on page refresh
   useEffect(() => {
+
+    debugger;
     if (activities.length === 0) {
       dispatch(getUserActivities());
     } 
