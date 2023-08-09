@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getUserWorkouts } from "../redux/workouts/workoutActions";
+import { addCompletedWorkout, getUserWorkouts } from "../redux/workouts/workoutActions";
 import { Button, Col, Container, Row, Accordion, Table } from "react-bootstrap";
 import WorkoutActivities from "./WorkoutActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
@@ -42,8 +42,10 @@ const Workout = () => {
     navigate(`/add_activities_to_workout/${workoutId}`)
   };
 
+  // dispatch add completed workout action and navigate user back to home
   const handleWorkoutComplete = () => {
-
+    dispatch(addCompletedWorkout({ workout }));
+    navigate("/home");
   };
 
   if (loading === false) {

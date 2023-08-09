@@ -112,3 +112,27 @@ export const deleteActivityFromWorkout = createAsyncThunk(
     }
   }
 );
+
+export const addCompletedWorkout = createAsyncThunk(
+  "/api/addCompletedWorkout",
+  async ({ workout }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
+        }
+      }
+      const { data } = await axios.post(
+        `${backendURL}/api/addCompletedWorkout`,
+        { workout },
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response.data) {
+        return rejectWithValue(error.response.data)
+      }
+    }
+  }
+);

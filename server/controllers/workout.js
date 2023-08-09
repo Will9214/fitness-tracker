@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Activity = require("../models/activity");
 const Workout = require("../models/workout");
+const CompletedWorkout = require("../models/completedWorkout");
 
 const addWorkout = async function(req, res, next) {
   const { userId } = req.body;
@@ -70,7 +71,29 @@ const deleteActivityFromWorkout = async function (req, res, next) {
   await workout.save();
 
   res.status(200).send({ workout, activity });
-}
+};
+
+const addCompletedWorkout = async function (req, res, next) {
+  const { workout } = req.body;
+console.log(req.body);
+
+  User.findById(workout.user)
+    .then((user) => {
+      const completedWorkout = new CompletedWorkout({
+        name: workout.name,
+        iat: new Date(),
+        activities: workout.activities,
+        user: user._id,
+      });
+      completedWorkout.save();
+      user.completedWorkouts.push(completedWorkout);
+      user.save();
+      res.status(200).send({ completedWorkout });
+    })
+    .catch((err) => {
+      res.json(err);
+    })
+};
 
 module.exports = {
   addWorkout,
@@ -79,4 +102,5 @@ module.exports = {
   removeWorkout,
   addActivityToWorkout,
   deleteActivityFromWorkout,
+  addCompletedWorkout,
 }

@@ -4,9 +4,10 @@ const crypto = require("crypto");
 
 const UserSchema = new Schema({
   username: { type: String, unique: true },
-  activities: [{ type: Schema.Types.ObjectId, ref: "activities" }],
-  workouts: [{ type: Schema.Types.ObjectId, ref: "workouts" }],
-  objectives: [{ type: Schema.Types.ObjectId, ref: "objectives" }],  
+  activities: [{ type: Schema.Types.ObjectId, ref: "activity" }],
+  workouts: [{ type: Schema.Types.ObjectId, ref: "workout" }],
+  completedWorkouts: [{ type: Schema.Types.ObjectId, ref: "completedWorkout"}],
+  objectives: [{ type: Schema.Types.ObjectId, ref: "objective" }],  
   hash: String,
   salt: String,
 });
