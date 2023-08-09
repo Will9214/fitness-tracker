@@ -2,6 +2,6 @@ require("dotenv").config();
 
 // for dev
 module.exports = {
-  MONGODB_URI: process.env.DEV_MONGODB_URI,
-  TOKEN_SECRET: 'helloworld'
+  MONGODB_URI: process.env.MONGODB_URI,
+  TOKEN_SECRET: process.env.TOKEN_SECRET,
 };
