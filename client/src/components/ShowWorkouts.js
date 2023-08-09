@@ -2,6 +2,7 @@ import { Button, CloseButton, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { removeWorkoutThunk } from "../redux/workouts/workoutActions";
 
 // displays user's workouts in a list
 const ShowWorkouts = () => {
@@ -20,7 +21,10 @@ const ShowWorkouts = () => {
 
   // dispatches delete workout function when clicked
   const handleWorkoutDeleteClick = (e) => {
-
+    if (e.target.ariaLabel === "remove") {
+      const workoutId = e.currentTarget.id;
+      dispatch(removeWorkoutThunk({ workoutId }));
+    }
   };
 
   // navigates to add workout screen when clicked

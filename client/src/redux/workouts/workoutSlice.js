@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addActivityToWorkout, deleteActivityFromWorkout, getUserWorkouts, removeWorkoutThunk } from "./workoutActions";
+import { addActivityToWorkout, addWorkoutThunk, deleteActivityFromWorkout, getUserWorkouts, removeWorkoutThunk } from "./workoutActions";
 
 export const workoutSlice = createSlice({
   name: "workout",
@@ -8,6 +8,18 @@ export const workoutSlice = createSlice({
   },
   reducers: {},
   extraReducers: async (builder) => {
+    builder.addCase(addWorkoutThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addWorkoutThunk.fulfilled, (state) => {
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(addWorkoutThunk.rejected, (state, action) => {
+      console.log("rejected addWorkoutThunk");
+      state.loading = false;
+      state.error = action.error.message || null;
+    });
     builder.addCase(getUserWorkouts.pending, (state) => {
       state.loading = true;
     });
@@ -49,7 +61,21 @@ export const workoutSlice = createSlice({
       console.log("rejected deleteActivityFromWorkout");
       state.loading = false;
       state.error = action.error.message || null;
-    })
+    });
+    builder.addCase(removeWorkoutThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(removeWorkoutThunk.fulfilled, (state, action) => {
+      const workoutId = action.payload._id;
+      state.workouts = state.workouts.filter(workout => workout._id !== workoutId);
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(removeWorkoutThunk.rejected, (state, action) => {
+      console.log("rejected removeWorkoutThunk"); 
+      state.loading = false;
+      state.error = action.error.message || null;
+    });
   },
 });
 

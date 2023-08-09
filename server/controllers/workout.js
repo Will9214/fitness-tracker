@@ -38,7 +38,15 @@ const updateWorkout = async function (req, res, next) {
 };
 
 const removeWorkout = async function (req, res, next) {
+  const { workoutId } = req.body;
 
+  const deletedWorkout = await Workout.findByIdAndDelete(workoutId);
+  const user = await User.findById(deletedWorkout.user);
+  const deletedWorkoutIndex = user.workouts.indexOf(workoutId);
+  user.workouts.splice(deletedWorkoutIndex, 1);
+  await user.save();
+
+  res.status(200).send(deletedWorkout);
 };
 
 const addActivityToWorkout = async function (req, res, next) {
