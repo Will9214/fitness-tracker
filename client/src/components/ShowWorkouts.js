@@ -69,16 +69,16 @@ const ShowWorkouts = () => {
 export default ShowWorkouts;
 
 const WorkoutsContainer = styled.div`
-  border: 1px solid black;
   height: auto;
-  border-radius: 10px;
+  padding-bottom: 1px;
+  box-shadow: 2px 2px 5px;
 `;
 
 const WorkoutContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
   padding: 6px;
   &:hover {
     background-color: #e0e0e0;
   }
+  margin: 0 5px;
 `;

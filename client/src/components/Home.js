@@ -8,6 +8,7 @@ import ShowActivities from "./ShowActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
 import ShowWorkouts from "./ShowWorkouts";
 import { getUserCompletedWorkouts, getUserWorkouts } from "../redux/workouts/workoutActions";
+import ShowCompletedWorkouts from "./ShowCompletedWorkouts";
 
 // displays home screen
 const Home = () => {
@@ -40,6 +41,9 @@ const Home = () => {
             </h1>
           </Col>
         </Row>
+          <Col className="text-center">
+            <Button onClick={handleSearchClick}>Search for an Exercise</Button>
+          </Col>
       </Container> 
       
       <Row>
@@ -47,7 +51,7 @@ const Home = () => {
           <ShowActivities />
         </Col>
         <Col md={6} className="pe-5">
-          <Button onClick={handleSearchClick}>Search for an Exercise</Button>
+          <ShowCompletedWorkouts />
         </Col>
         <Col md={3} className="pe-5">
           <ShowWorkouts />
