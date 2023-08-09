@@ -42,9 +42,13 @@ const Workout = () => {
     navigate(`/add_activities_to_workout/${workoutId}`)
   };
 
+  const handleWorkoutComplete = () => {
+
+  };
+
   if (loading === false) {
     return (
-      <div style={{ paddingTop: "180px" }}>
+      <div style={{ paddingTop: "180px" }}>      
         <WorkoutContainer className="col-md-8 offset-md-2">
           <div className="display-6 text-center">{workout?.name}</div>
           <hr className="m-1" />
@@ -62,20 +66,23 @@ const Workout = () => {
                   <h6>Add Activities below using the Add/Remove Activities Button</h6>
                 </>
               )}
-            </Accordion>
-  
-            <Container className="text-center mt-2 mb-3">
-              <Row>
-                <Col>
-                  <Button onClick={handleAddRemoveActivitiesClick}>Add/Remove Activities</Button>
-                </Col>
-                <Col>
-                  <Button onClick={handleBackClick}>Back</Button>
-                </Col>
-              </Row>
-            </Container>
-  
+            </Accordion>  
           </Container>
+
+          <Container className="text-center mt-2 mb-3">
+            <Row>
+              <Col>
+                <Button onClick={handleAddRemoveActivitiesClick}>Add/Remove Activities</Button>
+              </Col>
+              <Col>
+                <Button onClick={handleWorkoutComplete}>Complete Workout</Button>
+              </Col>
+              <Col>
+                <Button onClick={handleBackClick}>Back</Button>
+             </Col>
+            </Row>
+          </Container>
+
         </WorkoutContainer>
       </div>
     )
