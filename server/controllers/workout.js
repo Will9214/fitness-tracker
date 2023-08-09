@@ -75,7 +75,6 @@ const deleteActivityFromWorkout = async function (req, res, next) {
 
 const addCompletedWorkout = async function (req, res, next) {
   const { workout } = req.body;
-console.log(req.body);
 
   User.findById(workout.user)
     .then((user) => {
