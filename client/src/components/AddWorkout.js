@@ -35,9 +35,18 @@ const AddWorkout = () => {
   });
 
   // dispatches add workout action when form is submitted and navigates to home
-  const handleWorkoutFormSubmit = (data) => {
+  const handleWorkoutFormSubmit = async (data) => {
     dispatch(addWorkoutThunk({ data, userId }));
     navigate("/home");
+
+    
+    // try {
+    //   const workout = await dispatch(addWorkoutThunk({ data, userId })).unwrap()
+    //   debugger;
+    // } catch (rejectedValueOrSerializedError) {
+
+    // };
+    // navigate("/home");
   };
 
   // back button navigates home
