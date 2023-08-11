@@ -34,7 +34,7 @@ const NavBar = () => {
     if (user) {
       return (
         <>
-          <Col md={6}>
+          <Col md={2} xs={2}>
             <UserNameDiv>{user.username}</UserNameDiv>
           </Col>
           <Col md={2}>
@@ -72,7 +72,7 @@ const NavContainer = styled.div`
   color: white;
   margin: 0;
   width: 100%;
-  height: auto;
+  height: 150px;
   padding: 2em;
 `;
 

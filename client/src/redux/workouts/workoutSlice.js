@@ -12,7 +12,8 @@ export const workoutSlice = createSlice({
     builder.addCase(addWorkoutThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(addWorkoutThunk.fulfilled, (state) => {
+    builder.addCase(addWorkoutThunk.fulfilled, (state, action) => {
+      state.workouts.push(action.payload.workout);
       state.loading = false;
       state.error = null;
     });

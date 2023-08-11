@@ -36,16 +36,22 @@ const AddWorkout = () => {
 
   // dispatches add workout action when form is submitted and navigates to home
   const handleWorkoutFormSubmit = async (data) => {
-    dispatch(addWorkoutThunk({ data, userId }));
-    navigate("/home");
+    // dispatch(addWorkoutThunk({ data, userId }));
+    // navigate("/home");
 
-    
-    // try {
-    //   const workout = await dispatch(addWorkoutThunk({ data, userId })).unwrap()
-    //   debugger;
-    // } catch (rejectedValueOrSerializedError) {
 
-    // };
+    try {
+      const result = await dispatch(addWorkoutThunk({ data, userId })).unwrap();
+     
+      
+      console.log("workout id", result.workout._id);
+      
+      const workoutId = result.workout._id;
+      navigate(`/add_activities_to_workout/${workoutId}`);
+      
+    } catch (rejectedValueOrSerializedError) {
+
+    };
     // navigate("/home");
   };
 
