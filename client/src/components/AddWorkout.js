@@ -97,6 +97,11 @@ export default AddWorkout;
 
 const AddWorkoutContainer = styled.div`
   padding-top: 180px;
+
+  @media (max-width: 576px) {
+    padding-top: 100px;
+    padding-bottom: 75px;
+  }
 `;
 
 const FormContainer = styled.div`

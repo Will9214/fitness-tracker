@@ -102,6 +102,10 @@ export default Signup;
 
 const SignUpContainer = styled.div`
   padding-top: 180px;
+
+  @media (max-width: 576px) {
+    padding-top: 90px;
+  }
 `;
 
 const ErrorContainer = styled.div`

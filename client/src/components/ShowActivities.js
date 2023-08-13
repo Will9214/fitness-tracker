@@ -60,23 +60,33 @@ const ShowActivities = () => {
   };
 
   return (
-    <ActivitiesContainer className="col-sm-3 offset-sm-4">
-      <div className="display-6 text-center">Activity List</div>
-      <hr className="m-1"/>
+    <ActivitiesScreen>
+      <ActivitiesContainer className="col-sm-3 offset-sm-4">
+        <div className="display-6 text-center">Activity List</div>
+        <hr className="m-1"/>
 
-      {renderUserActivities()}
+        {renderUserActivities()}
 
-      <Container className="text-center mt-2 mb-3">
-        <Button onClick={handleAddActivityClick}>Create Activity</Button>
-      </Container>
-    </ActivitiesContainer>
+        <Container className="text-center mt-2 mb-3">
+          <Button onClick={handleAddActivityClick}>Create Activity</Button>
+        </Container>
+      </ActivitiesContainer>
+    </ActivitiesScreen>
   )
 };
 
 export default ShowActivities;
 
+const ActivitiesScreen = styled.div`
+padding: 0 10px;  
+padding-top: 170px;
+
+@media (max-width: 576px) {
+  padding-top: 100px;
+}
+`;
+
 const ActivitiesContainer = styled.div`
-  padding-top: 170px;
   box-shadow: 2px 2px 5px;
   padding-bottom: 1px;
   margin-bottom: 80px;

@@ -2,7 +2,8 @@ import { Button, CloseButton, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { removeWorkoutThunk } from "../redux/workouts/workoutActions";
+import { getUserWorkouts, removeWorkoutThunk } from "../redux/workouts/workoutActions";
+import { useEffect } from "react";
 
 // displays user's workouts in a list
 const ShowWorkouts = () => {
@@ -10,6 +11,12 @@ const ShowWorkouts = () => {
   const dispatch = useDispatch();
 
   const { workouts } = useSelector(state => state.userWorkouts);
+
+  useEffect(() => {
+    if (workouts.length === 0) {
+      dispatch(getUserWorkouts());
+    }
+  })
 
   // navigates to individual workout's screen when workout is clicked
   const handleWorkoutClick = (e) => {
@@ -53,23 +60,33 @@ const ShowWorkouts = () => {
   }
 
   return (
-    <WorkoutsContainer className="col-sm-3 offset-sm-4">
-      <div className="display-6 text-center">Workout List</div>
-      <hr className="m-1" />
+    <WorkoutScreen>
+      <WorkoutsContainer className="col-sm-3 offset-sm-4">
+        <div className="display-6 text-center">Workout List</div>
+        <hr className="m-1" />
 
-      {renderUserWorkouts()}
+        {renderUserWorkouts()}
 
-      <Container className="text-center mt-2 mb-3">
-        <Button onClick={handleAddWorkoutClick}>Create Workout</Button>
-      </Container>
-    </WorkoutsContainer>
+        <Container className="text-center mt-2 mb-3">
+          <Button onClick={handleAddWorkoutClick}>Create Workout</Button>
+        </Container>
+      </WorkoutsContainer>
+    </WorkoutScreen>
   )
 };
 
 export default ShowWorkouts;
 
-const WorkoutsContainer = styled.div`
+const WorkoutScreen = styled.div`
+  padding: 0 10px;  
   padding-top: 170px;
+  
+  @media (max-width: 576px) {
+    padding-top: 100px;
+  }
+`;
+
+const WorkoutsContainer = styled.div`
   padding-bottom: 1px;
   margin-bottom: 80px;
   box-shadow: 2px 2px 5px;

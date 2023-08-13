@@ -20,4 +20,8 @@ export default SearchExercise;
 const SearchContainer = styled.div`
   padding-top: 170px;
   padding-bottom: 70px;
+
+  @media (max-width: 576px) {
+    padding-top: 90px;
+  }
 `;

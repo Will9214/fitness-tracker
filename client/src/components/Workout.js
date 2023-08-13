@@ -50,7 +50,7 @@ const Workout = () => {
 
   if (loading === false) {
     return (
-      <div style={{ paddingTop: "180px" }}>      
+      <WorkoutScreen>      
         <WorkoutContainer className="col-md-8 offset-md-2">
           <div className="display-6 text-center">{workout?.name}</div>
           <hr className="m-1" />
@@ -86,12 +86,21 @@ const Workout = () => {
           </Container>
 
         </WorkoutContainer>
-      </div>
+      </WorkoutScreen>
     )
   }
 };
 
 export default Workout;
+
+const WorkoutScreen = styled.div`
+  padding-top: 180px;
+  margin: 0 10px;
+
+  @media (max-width: 576px) {
+    padding-top: 100px;
+  }
+`;
 
 const WorkoutContainer = styled.div`
   box-shadow: 2px 2px 5px;

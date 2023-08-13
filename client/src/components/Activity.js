@@ -167,7 +167,7 @@ const Activity = () => {
   };
 
   return(
-    <div style={{ paddingTop: "180px" }}>
+    <ActivityScreen>
       <ActivityContainer className="col-md-8 offset-md-2">
         <div className="display-6 text-center">{activity?.name}</div>
         <hr className="m-1"/>
@@ -225,11 +225,20 @@ const Activity = () => {
             </Container>
           </Container>
       </ActivityContainer>      
-    </div>
+    </ActivityScreen>
   )
 };
 
 export default Activity;
+
+const ActivityScreen = styled.div`
+  padding-top: 180px;
+
+  @media (max-width: 576px) {
+    padding: 100px 10px;
+
+  }
+`;
 
 const ActivityContainer = styled.div`
   box-shadow: 2px 2px 5px;

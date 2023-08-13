@@ -33,14 +33,14 @@ const NavBar = () => {
   const renderLinks = () => {
     if (user) {
       return (
-        <>
-          <Col md={2} sm={2} >
+        <Col xs={4}>
+          <Col>
             <UserNameDiv>{user.username}</UserNameDiv>
           </Col>
-          <Col md={2} sm={2}>
+          <Col>
             <SignOutDiv onClick={handleSignOutClick}>Sign Out</SignOutDiv>
           </Col>
-        </>
+        </Col>
       );
     } else {
       return;
@@ -52,7 +52,7 @@ const NavBar = () => {
       <Container>
         <Row className="align-items-center">
           <Col>
-            <h1 className="display-3">
+            <h1 className="display-3" style={{ paddingTop: "8px" }}>
               Fit'n'BeGreat
             </h1>
           </Col>
@@ -75,20 +75,29 @@ const NavContainer = styled.div`
   height: 150px;
   padding: 2em;
 
-  @media (max-width: 600px) {
-    padding: 8px;
-    text-align: center;
+  @media (max-width: 576px) {
+    padding: 5px;
+    height: 75px;
   }
 `;
 
 const UserNameDiv = styled.div`
   font-size: 30px;
   text-align: center;
+
+  @media (max-width: 576px) {
+    font-size: 20px;
+  }
 `;
 
 const SignOutDiv = styled.div`
   font-size: 30px;
+  text-align: center;
   &:hover {
     text-decoration: underline;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 20px;
   }
 `;
