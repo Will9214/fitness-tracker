@@ -155,7 +155,7 @@ const Activity = () => {
   };
 
   const handleBackClick = () => {
-    navigate("/home");
+    navigate("/activities");
   };
 
   // dispatch updateActivity with the updated values when Save Changes button is clicked
@@ -232,9 +232,9 @@ const Activity = () => {
 export default Activity;
 
 const ActivityContainer = styled.div`
-  border: 1px solid black;
-  height: auto;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
+  padding-bottom: 5px;
+  margin-bottom: 50px;
 `;
 
 const FieldTitle = styled.div`

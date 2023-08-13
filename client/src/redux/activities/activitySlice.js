@@ -23,7 +23,8 @@ export const activitySlice = createSlice({
     builder.addCase(addActivityThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(addActivityThunk.fulfilled, (state) => {
+    builder.addCase(addActivityThunk.fulfilled, (state, action) => {
+      state.activities.push(action.payload.activity);
       state.loading = false;
       state.error = null;
     });

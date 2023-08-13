@@ -98,7 +98,7 @@ const AddActivitiesToWorkout = () => {
         <Form>
           
           <Form.Group className="mb-3">
-            <Form.Label>Choose Activities In Workout</Form.Label>
+            <Form.Label>Choose Activities You Would Like to Add to Workout</Form.Label>
             <Row>
               
               <Col md={5}>
@@ -115,7 +115,7 @@ const AddActivitiesToWorkout = () => {
               </Col>
 
               <Col md={5}>
-                <div>Activities to be added to Workout</div>
+                <div>Activities In Workout</div>
                
                 <AddedActivities>
                   {renderActivitiesAddedToWorkout()}
@@ -127,13 +127,8 @@ const AddActivitiesToWorkout = () => {
 
           <Row className="text-center">
             <Col>
-              <Button type="submit">
-                Submit
-              </Button>
-            </Col>
-            <Col>
               <Button onClick={handleBackClick}>
-                Back
+                Back to Workout
               </Button>
             </Col>
           </Row>
@@ -148,6 +143,7 @@ export default AddActivitiesToWorkout;
 
 const AddWorkoutContainer = styled.div`
   padding-top: 180px;
+  padding-bottom: 80px;
 `;
 
 const FormContainer = styled.div`

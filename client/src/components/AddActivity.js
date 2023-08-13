@@ -36,12 +36,12 @@ const AddActivity = () => {
   // dispatches add activity action when form is submitted
   const handleActivityFormSubmit = (data) => {
     dispatch(addActivityThunk({ data, userId, userToken }));
-    navigate("/home");
+    navigate("/activities");
   };
 
   // back button navigates to home
   const handleBackClick = () => {
-    navigate("/home");
+    navigate("/activities");
   };
 
   // Display specific form inputs depending on type of activity selected

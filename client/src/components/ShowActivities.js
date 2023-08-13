@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { Button, Container, Row, Col, CloseButton } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeActivityThunk } from "../redux/activities/activityActions";
+import { getUserActivities, removeActivityThunk } from "../redux/activities/activityActions";
+import { useEffect } from "react";
 
 // displays user's activities in a list
 const ShowActivities = () => {
@@ -10,6 +11,12 @@ const ShowActivities = () => {
   const dispatch = useDispatch();
 
   const { activities } = useSelector(state => state.userActivities);
+
+  useEffect(() => {
+    if (activities.length === 0) {
+      dispatch(getUserActivities());
+    }
+  })
 
   // navigates to the individual activity's screen when activity is clicked
   const handleActivityClick = (e) => {
@@ -37,7 +44,7 @@ const ShowActivities = () => {
               <Col>
                 {activity.name}
               </Col>
-              <Col md={2}>
+              <Col xs={2}>
                 <CloseButton id={activity._id} onClick={handleActivityDeleteClick} aria-label="remove"/>
               </Col>
             </Row>

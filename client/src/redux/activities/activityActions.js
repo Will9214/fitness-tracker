@@ -13,11 +13,13 @@ export const addActivityThunk = createAsyncThunk(
           "Authorization": `Bearer ${localStorage.getItem("userToken")}`,
         }
       }
-      await axios.post(
+      const activity = await axios.post(
         `${backendURL}/api/addActivity`,
         { data, userId },
         config
-      )
+      );
+      
+      return activity.data;
     } catch (error) {
       if (error.response.data) {
         return rejectWithValue(error.response.data)
