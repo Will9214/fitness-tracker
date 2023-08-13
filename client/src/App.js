@@ -11,6 +11,8 @@ import SearchExercise from './components/SearchExersice';
 import AddWorkout from './components/AddWorkout';
 import AddActivitiesToWorkout from './components/AddActivitiesToWorkout';
 import Workout from './components/Workout';
+import ShowActivities from './components/ShowActivities';
+import ShowWorkouts from './components/ShowWorkouts';
 
 function App() {
   return (
@@ -22,11 +24,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/activities" element={<ShowActivities />} />
             <Route path="/add_activity" element={<AddActivity />} />
             <Route path="/activities/:activityId" element={<Activity />} />
             <Route path="/search_exercise" element={<SearchExercise />} />
             <Route path="/add_workout" element={<AddWorkout />} />
             <Route path="/add_activities_to_workout/:workoutId" element={<AddActivitiesToWorkout />} />
+            <Route path="/workouts" element={<ShowWorkouts />} />
             <Route path="/workouts/:workoutId" element={<Workout />} />
           </Route>
         </Routes>

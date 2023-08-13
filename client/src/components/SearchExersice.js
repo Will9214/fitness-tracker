@@ -18,5 +18,6 @@ const SearchExercise = () => {
 export default SearchExercise;
 
 const SearchContainer = styled.div`
-  padding-top: 180px;
+  padding-top: 170px;
+  padding-bottom: 70px;
 `;

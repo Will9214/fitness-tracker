@@ -53,7 +53,7 @@ const ShowWorkouts = () => {
   }
 
   return (
-    <WorkoutsContainer>
+    <WorkoutsContainer className="col-sm-3 offset-sm-4">
       <div className="display-6 text-center">Workout List</div>
       <hr className="m-1" />
 
@@ -69,8 +69,8 @@ const ShowWorkouts = () => {
 export default ShowWorkouts;
 
 const WorkoutsContainer = styled.div`
-  height: auto;
-  padding-bottom: 1px;
+  padding-top: 170px;
+  padding-bottom: 50px;
   box-shadow: 2px 2px 5px;
 `;
 

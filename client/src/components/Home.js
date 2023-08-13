@@ -4,9 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import ShowActivities from "./ShowActivities";
 import { getUserActivities } from "../redux/activities/activityActions";
-import ShowWorkouts from "./ShowWorkouts";
 import { getUserCompletedWorkouts, getUserWorkouts } from "../redux/workouts/workoutActions";
 import ShowCompletedWorkouts from "./ShowCompletedWorkouts";
 
@@ -41,22 +39,10 @@ const Home = () => {
             </h1>
           </Col>
         </Row>
-          <Col className="text-center">
-            <Button onClick={handleSearchClick}>Search for an Exercise</Button>
-          </Col>
       </Container> 
       
-      <Row>
-        <Col md={3} className="ps-5">
-          <ShowActivities />
-        </Col>
-        <Col md={6} className="pe-5">
-          <ShowCompletedWorkouts />
-        </Col>
-        <Col md={3} className="pe-5">
-          <ShowWorkouts />
-        </Col>
-      </Row>
+      <ShowCompletedWorkouts />
+        
     </HomeContainer>
   )
 };
@@ -64,5 +50,6 @@ const Home = () => {
 export default Home;
 
 const HomeContainer = styled.div`
-  padding-top: 180px;
+  padding-top: 170px;
+  padding-bottom: 70px;
 `;

@@ -53,7 +53,7 @@ const ShowActivities = () => {
   };
 
   return (
-    <ActivitiesContainer>
+    <ActivitiesContainer className="col-sm-3 offset-sm-4">
       <div className="display-6 text-center">Activity List</div>
       <hr className="m-1"/>
 
@@ -69,9 +69,9 @@ const ShowActivities = () => {
 export default ShowActivities;
 
 const ActivitiesContainer = styled.div`
-  height: auto;
+  padding-top: 170px;
   box-shadow: 2px 2px 5px;
-  padding-bottom: 1px;
+  padding-bottom: 50px;
 `;
 
 const ActivityContainer = styled.div`

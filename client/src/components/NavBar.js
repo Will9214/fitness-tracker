@@ -34,10 +34,10 @@ const NavBar = () => {
     if (user) {
       return (
         <>
-          <Col md={2} xs={2}>
+          <Col md={2} sm={2} >
             <UserNameDiv>{user.username}</UserNameDiv>
           </Col>
-          <Col md={2}>
+          <Col md={2} sm={2}>
             <SignOutDiv onClick={handleSignOutClick}>Sign Out</SignOutDiv>
           </Col>
         </>
@@ -74,6 +74,11 @@ const NavContainer = styled.div`
   width: 100%;
   height: 150px;
   padding: 2em;
+
+  @media (max-width: 600px) {
+    padding: 8px;
+    text-align: center;
+  }
 `;
 
 const UserNameDiv = styled.div`

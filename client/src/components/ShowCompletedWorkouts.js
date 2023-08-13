@@ -11,12 +11,12 @@ const ShowCompletedWorkouts = () => {
       return completedWorkouts.map((workout) => (
         <div key={workout._id} id={workout._id} className="p-2">
           <WorkoutContainer id={workout._id}>
-            <Row>
+            <div>
               {workout.name}
-            </Row>
-            <Row>
+            </div>
+            <div>
               {workout.iat}
-            </Row>
+            </div>
           </WorkoutContainer>
         </div>
       ))
@@ -24,7 +24,7 @@ const ShowCompletedWorkouts = () => {
   }
 
   return (
-    <CompletedWorkoutsContainer>
+    <CompletedWorkoutsContainer className="col-sm-6 offset-sm-3">
       <div className="display-6 text-center">Completed Workouts</div>
       <hr className="m-1" />
 
