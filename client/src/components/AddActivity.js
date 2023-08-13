@@ -147,7 +147,6 @@ const AddActivityContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
   padding: 20px;
 `;

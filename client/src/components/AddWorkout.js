@@ -57,7 +57,7 @@ const AddWorkout = () => {
 
   // back button navigates home
   const handleBackClick = () => {
-    navigate("/home");
+    navigate("/workouts");
   };
 
   return (
@@ -100,7 +100,6 @@ const AddWorkoutContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
   padding: 20px;
 `;

@@ -34,7 +34,7 @@ const Workout = () => {
   
   // navigates to home when clicked
   const handleBackClick = () => {
-    navigate("/home");
+    navigate("/workouts");
   };
 
   // navigates to add activities to workout screen
@@ -94,7 +94,7 @@ const Workout = () => {
 export default Workout;
 
 const WorkoutContainer = styled.div`
-  border: 1px solid black;
-  height: auto;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
+  padding-bottom: 1px;
+  margin-bottom: 80px;
 `;

@@ -52,8 +52,9 @@ export const workoutSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(deleteActivityFromWorkout.fulfilled, (state, action) => {
+      const activityId = action.payload.activity._id;
       const workout = state.workouts.find(workout => workout?._id === action.payload.workout._id);
-      const deletedActivityIndex = workout.activities.indexOf(action.payload.activity._id);
+      const deletedActivityIndex = workout.activities.map(activity => activity._id).indexOf(activityId);
       workout.activities.splice(deletedActivityIndex, 1);
       state.loading = false;
       state.error = null;

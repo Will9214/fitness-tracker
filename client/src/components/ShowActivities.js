@@ -78,7 +78,8 @@ export default ShowActivities;
 const ActivitiesContainer = styled.div`
   padding-top: 170px;
   box-shadow: 2px 2px 5px;
-  padding-bottom: 50px;
+  padding-bottom: 1px;
+  margin-bottom: 80px;
 `;
 
 const ActivityContainer = styled.div`

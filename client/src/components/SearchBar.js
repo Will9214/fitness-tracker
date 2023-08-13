@@ -98,20 +98,12 @@ const SearchBar = () => {
     setOffset(0);
   }
 
-  // home button will navigate to home
-  const handleHomeClick = () => {
-    navigate("/home");
-  };
-
   return (
     <Form className="row" onSubmit={handleNameSubmit}>
       <Form.Group className="col-md-11">
         <Form.Label style={{ fontWeight: "700", fontSize: "1.5rem"}}>Search for Exercise and press Enter, Choose Exercise Type, and/or Choose Muscle.</Form.Label>
         <Form.Label>If you find an exercise you like, click the plus symbol in the top, right corner of the individual results to add it to your Activity List.</Form.Label>
       </Form.Group>
-      <div className="col-md-1">
-        <Button onClick={handleHomeClick}>Home</Button>
-      </div>
       <Form.Group className="mb-1 col-md-6">
         <Form.Control type="text" placeholder="Search Exercise" />
       </Form.Group>

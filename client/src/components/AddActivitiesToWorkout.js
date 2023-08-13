@@ -59,7 +59,7 @@ const AddActivitiesToWorkout = () => {
               <Col>
                 {activity.name}
               </Col>
-              <Col md={2}>
+              <Col xs={2} sm={2}>
                 <PlusButton id={activity._id} onClick={handleAddActivityClick}>&#x2795;</PlusButton>
               </Col>
             </Row>
@@ -79,7 +79,7 @@ const AddActivitiesToWorkout = () => {
               <Col>
                 {activity.name}
               </Col>
-              <Col md={2}>
+              <Col xs={2} sm={2}>
                 <MinusButton id={activity._id} onClick={handleDeleteActivityClick}>&#x2796;</MinusButton>
               </Col>
             </Row>
@@ -98,11 +98,11 @@ const AddActivitiesToWorkout = () => {
         <Form>
           
           <Form.Group className="mb-3">
-            <Form.Label>Choose Activities You Would Like to Add to Workout</Form.Label>
+            <Form.Label>Choose Activities You Would Like to Add to Your <strong>{workout?.name}</strong> Workout</Form.Label>
             <Row>
               
-              <Col md={5}>
-                <div>Activities</div>
+              <Col sm={5}>
+                <div><strong>Activities</strong></div>
               
                 <SelectActivities>
                   {renderUserActivities()}
@@ -110,12 +110,12 @@ const AddActivitiesToWorkout = () => {
 
               </Col>
 
-              <Col md={2} className="text-center my-auto">
+              <Col sm={2} className="text-center my-auto">
                 &#x2192; &#x2192;
               </Col>
 
-              <Col md={5}>
-                <div>Activities In Workout</div>
+              <Col sm={5}>
+                <div><strong>Activities In Workout</strong></div>
                
                 <AddedActivities>
                   {renderActivitiesAddedToWorkout()}
@@ -147,15 +147,15 @@ const AddWorkoutContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 10px;
+  box-shadow: 2px 2px 5px;
   padding: 20px;
 `;
 
 const SelectActivities = styled.div`
-  border: 1px solid black;
+  box-shadow: inset 2px 2px 3px;
   height: 186px;
   overflow-y: auto;
+  padding: 10px 0;
 `;
 
 const PlusButton = styled.div`
@@ -173,12 +173,14 @@ const MinusButton = styled.div`
 `;
 
 const AddedActivities = styled.div`
- border: 1px solid black;
+ box-shadow: inset 2px 2px 3px;
  height: 186px;
  overflow-y: auto;
+ padding: 10px 0;
 `;
 
 const ActivityContainer = styled.div`
-  border: 1px solid black;
+  box-shadow: 2px 2px 5px;
   padding: 6px;
+  margin: 0 10px;
 `;

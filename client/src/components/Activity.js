@@ -191,7 +191,7 @@ const Activity = () => {
                 Description:
               </FieldTitle>
                   
-              <div style={{ paddingLeft: "30px"}}>
+              <div className="text-break" style={{ paddingLeft: "30px"}}>
                 {activity?.description}
               </div>      
             </Row>
@@ -234,7 +234,7 @@ export default Activity;
 const ActivityContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding-bottom: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 `;
 
 const FieldTitle = styled.div`

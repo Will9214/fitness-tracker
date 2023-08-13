@@ -42,7 +42,7 @@ const ShowWorkouts = () => {
               <Col>
                 {workout.name}
               </Col>
-              <Col md={2}>
+              <Col xs={2}>
                 <CloseButton id={workout._id} onClick={handleWorkoutDeleteClick} aria-label="remove" ></CloseButton>
               </Col>
             </Row>
@@ -70,7 +70,8 @@ export default ShowWorkouts;
 
 const WorkoutsContainer = styled.div`
   padding-top: 170px;
-  padding-bottom: 50px;
+  padding-bottom: 1px;
+  margin-bottom: 80px;
   box-shadow: 2px 2px 5px;
 `;
 
