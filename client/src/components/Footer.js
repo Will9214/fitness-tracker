@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // gives space at the bottom of the view window
 const Footer = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
   const [isHome, setIsHome] = useState(false);
   const [isActivities, setIsActivities] = useState(false);
@@ -31,14 +33,22 @@ const Footer = () => {
     navigate("/search_exercise");
   };
 
+  const renderNavigation = () => {
+    if (user) {
+      return (
+        <NavRow className="row text-center">
+          <NavColumn onClick={handleHomeClick} className="col-3">Home</NavColumn>
+          <NavColumn onClick={handleActivitiesClick} className="col-3">Activities</NavColumn>
+          <NavColumn onClick={handleWorkoutsClick} className="col-3">Workouts</NavColumn>
+          <NavColumn onClick={handleSearchClick} className="col-3">Search</NavColumn>
+        </NavRow>
+      )
+    }
+  };
+
   return (
     <FooterContainer className="fixed-bottom">
-      <NavRow className="row text-center">
-        <NavColumn onClick={handleHomeClick} className="col-3">Home</NavColumn>
-        <NavColumn onClick={handleActivitiesClick} className="col-3">Activities</NavColumn>
-        <NavColumn onClick={handleWorkoutsClick} className="col-3">Workouts</NavColumn>
-        <NavColumn onClick={handleSearchClick} className="col-3">Search</NavColumn>
-      </NavRow>
+      {renderNavigation()}
     </FooterContainer>
   )
 };
@@ -55,7 +65,6 @@ const FooterContainer = styled.div`
 
 const NavRow = styled.div`
   height: 100%;
-  
 `;
 
 const NavColumn = styled.div`
