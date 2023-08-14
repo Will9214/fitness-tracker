@@ -110,7 +110,7 @@ const WorkoutsDescription = styled.div`
   margin-bottom: 20px;
 
   @media (min-width: 576px) {
-    margin-left: 33.33%;
+    margin-left: 25%;
   }
 
   @media (max-width: 576px) {

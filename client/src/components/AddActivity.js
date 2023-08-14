@@ -56,7 +56,7 @@ const AddActivity = () => {
       return (
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridWeight">
-            <Form.Label>Weight</Form.Label>
+            <Form.Label>Weight(lbs)</Form.Label>
             <Form.Control type="text" placeholder="Amt Lifted" name="weight" {...register("weight", { required: false })}/>
           </Form.Group>
 
@@ -75,12 +75,12 @@ const AddActivity = () => {
       return (
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridDuration">
-            <Form.Label>Time</Form.Label>
+            <Form.Label>Time(min)</Form.Label>
             <Form.Control type="text" placeholder="Enter Time" name="time" {...register("time", { required: false })}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridDistance">
-            <Form.Label>Distance</Form.Label>
+            <Form.Label>Distance(mi)</Form.Label>
             <Form.Control type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
           </Form.Group>
         </Row>

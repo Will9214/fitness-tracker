@@ -112,6 +112,7 @@ export default Login;
 
 const LoginContainer = styled.div`
   padding-top: 180px;
+  padding-bottom: 50px;
 
   @media (max-width: 576px) {
     padding-top: 90px;

@@ -37,7 +37,7 @@ const Activity = () => {
         <>
           <Row className="text-center"> 
             <Col className="col-md-4">
-                  <FieldTitle>Weight: </FieldTitle>
+                  <FieldTitle>Weight(lbs): </FieldTitle>
   
                   {isEditing ? (
                     <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
@@ -72,37 +72,25 @@ const Activity = () => {
     } else if (activity?.type.toLowerCase() === "cardio") {
       return (
         <>
-          <Row>
+          <Row className="text-center">
             <Col className="col-md-6">
-              <Row>
-                <Col className="col-md-auto">
-                  <FieldTitle>Distance: </FieldTitle>
-                </Col>
-                <Col className="col-md-auto">
+                  <FieldTitle>Distance(mi): </FieldTitle>
               
                   {isEditing ? (
                     <input onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
                   ) : (
                     <div>{activity?.distance}</div>
                   )}
-
-                </Col>
-              </Row>
             </Col>
 
             <Col className="col-md-6">
-              <Row>
-                <Col className="col-md-auto">
-                  <FieldTitle>Time: </FieldTitle>
-                </Col>
-                <Col className="col-md-auto">
+                  <FieldTitle>Time(min): </FieldTitle>
+
                   {isEditing ? (
                     <input onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
                   ) : (
                     <div>{activity?.time}</div>
                   )}
-                </Col>
-              </Row>
             </Col>
           </Row>
           <hr />

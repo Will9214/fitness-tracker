@@ -111,7 +111,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
             <Row className="text-center align-items-center">
               <Col md={3}>
 
-                <div>Weight</div>
+                <div>Weight(lbs)</div>
 
                 {isEditingWeight ? (
                   <input name="weight" onChange={e => setEditedActivityWeight(e.target.value)} value={editedActivityWeight} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateWeight} autoFocus style={{ width: "50px" }}/>
@@ -150,7 +150,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
             
               <Row className="text-center">
                 <Col md={4}>
-                  <div>Distance</div>
+                  <div>Distance(mi)</div>
 
                   {isEditingDistance ? (
                   <input name="distance" onChange={e => setEditedActivityDistance(e.target.value)} value={editedActivityDistance} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateDistance} autoFocus style={{ width: "50px" }}/>
@@ -161,7 +161,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
                 </Col>
 
                 <Col md={4}>
-                  <div>Time</div>
+                  <div>Time(min)</div>
 
                   {isEditingTime ? (
                   <input name="time" onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateTime} autoFocus style={{ width: "50px" }}/>

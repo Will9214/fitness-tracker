@@ -32,7 +32,7 @@ export const authSlice = createSlice({
     builder.addCase(signUp.rejected, (state, action) => {
       console.log("rejected signUp");
       state.loading = false;
-      state.error = action.error.message || null;
+      state.error = action.payload || null;
     });
     builder.addCase(signIn.pending, (state) => {
       state.loading = true;
@@ -46,7 +46,7 @@ export const authSlice = createSlice({
     builder.addCase(signIn.rejected, (state, action) => {
       console.log("rejected signIn");
       state.loading = false;
-      state.error = action.error.message || null;
+      state.error = action.payload || null;
     });
     builder.addCase(getUser.pending, (state) => {
       state.loading = true;

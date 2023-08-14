@@ -42,7 +42,7 @@ const Signup = () => {
 
   // displays message if error occurs
   const renderSubmitError = () => {
-    if (error) {
+    if (error === "Username is in use. Please create a unique Username.") {
       return (
         <ErrorContainer className="col-md-4 mb-2">
           <ErrorMessage>{error}</ErrorMessage>
@@ -102,6 +102,7 @@ export default Signup;
 
 const SignUpContainer = styled.div`
   padding-top: 180px;
+  padding-bottom: 50px;
 
   @media (max-width: 576px) {
     padding-top: 90px;
