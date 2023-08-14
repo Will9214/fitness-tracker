@@ -1,34 +1,24 @@
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { styled } from "styled-components";
+import styled from "styled-components";
+import CompletedWorkout from "./CompletedWorkout";
 
 
 const ShowCompletedWorkouts = () => {
   const { completedWorkouts } = useSelector(state => state.userWorkouts);
-
-  const renderUserCompletedWorkouts = () => {
-    if (completedWorkouts) {
-      return completedWorkouts.map((workout) => (
-        <div key={workout._id} id={workout._id} className="p-2">
-          <WorkoutContainer id={workout._id}>
-            <div>
-              {workout.name}
-            </div>
-            <div>
-              {workout.iat}
-            </div>
-          </WorkoutContainer>
-        </div>
-      ))
-    }
-  }
 
   return (
     <CompletedWorkoutsContainer className="col-sm-6 offset-sm-3">
       <div className="display-6 text-center">Completed Workouts</div>
       <hr className="m-1" />
 
-      {renderUserCompletedWorkouts()}
+      {completedWorkouts?.map((workout, i) => (
+        <CompletedWorkout
+          key={workout._id}
+          id={workout._id}
+          workout={workout}
+        />
+      ))}
 
     </CompletedWorkoutsContainer>
   )
