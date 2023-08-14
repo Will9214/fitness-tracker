@@ -159,11 +159,11 @@ const AddActivity = () => {
 export default AddActivity;
 
 const AddActivityContainer = styled.div`
-  padding-top: 180px;
-  padding-bottom: 120px;
+  padding-top: 210px;
+  padding-bottom: 40px;
 
   @media (max-width: 576px) {
-    padding-top: 100px;
+    padding-top: 90px;
     padding-bottom: 75px;
   }
 `;

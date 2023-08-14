@@ -96,7 +96,8 @@ const AddWorkout = () => {
 export default AddWorkout;
 
 const AddWorkoutContainer = styled.div`
-  padding-top: 180px;
+  padding-top: 220px;
+  padding-bottom: 40px;
 
   @media (max-width: 576px) {
     padding-top: 100px;

@@ -18,11 +18,12 @@ const SearchExercise = () => {
 export default SearchExercise;
 
 const SearchContainer = styled.div`
-  padding-top: 170px;
-  padding-bottom: 70px;
+  padding-top: 210px;
+  padding-bottom: 30px;
 
   @media (max-width: 576px) {
     padding-top: 90px;
+    padding-bottom: 50px;
     font-size: 11px;
   }
 

@@ -83,17 +83,18 @@ export default ShowActivities;
 
 const ActivitiesScreen = styled.div`
 padding: 0 10px;  
-padding-top: 170px;
+padding-top: 210px;
+padding-bottom: 40px;
 
 @media (max-width: 576px) {
-  padding-top: 100px;
+  padding-top: 90px;
+  padding-bottom: 70px;
 }
 `;
 
 const ActivitiesContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding-bottom: 1px;
-  margin-bottom: 80px;
 `;
 
 const ActivityContainer = styled.div`

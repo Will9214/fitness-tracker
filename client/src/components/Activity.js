@@ -201,18 +201,18 @@ const Activity = () => {
 export default Activity;
 
 const ActivityScreen = styled.div`
-  padding-top: 180px;
+  padding-top: 220px;
+  padding-bottom: 40px;
 
   @media (max-width: 576px) {
     padding: 100px 10px;
-
+    padding-bottom: 70px;
   }
 `;
 
 const ActivityContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding-bottom: 5px;
-  margin-bottom: 80px;
 `;
 
 const FieldTitle = styled.div`

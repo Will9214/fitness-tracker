@@ -57,10 +57,16 @@ export default Footer;
 
 const FooterContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 40px;
   background: #282c34;
   margin-top: 50px;
   color: white;
+
+  @media (min-width: 576px) {
+    top: 150px;
+    margin-top: 0px;
+    font-weight: 700;
+  }
 `;
 
 const NavRow = styled.div`
@@ -68,6 +74,7 @@ const NavRow = styled.div`
 `;
 
 const NavColumn = styled.div`
+  padding-top: 6px;
   border: 1px solid white;
   &:hover {
     background-color: #768299;

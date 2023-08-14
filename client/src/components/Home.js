@@ -53,11 +53,12 @@ const Home = () => {
 export default Home;
 
 const HomeContainer = styled.div`
-  padding-top: 170px;
-  padding-bottom: 70px;
+  padding-top: 200px;
+  padding-bottom: 20px;
 
   @media (max-width: 576px) {
-    padding-top: 90px;
+    padding-top: 85px;
+    padding-bottom: 60px;
   }
 `;
 

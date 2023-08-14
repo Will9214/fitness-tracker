@@ -103,18 +103,19 @@ const Workout = () => {
 export default Workout;
 
 const WorkoutScreen = styled.div`
-  padding-top: 180px;
+  padding-top: 210px;
+  padding-bottom: 40px;
   margin: 0 10px;
 
   @media (max-width: 576px) {
     padding-top: 100px;
+    padding-bottom: 70px;
   }
 `;
 
 const WorkoutContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding-bottom: 1px;
-  margin-bottom: 80px;
 `;
 
 const WorkoutInstructions = styled.div`

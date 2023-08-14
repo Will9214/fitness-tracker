@@ -142,11 +142,12 @@ const AddActivitiesToWorkout = () => {
 export default AddActivitiesToWorkout;
 
 const AddWorkoutContainer = styled.div`
-  padding-top: 180px;
-  padding-bottom: 80px;
+  padding-top: 220px;
+  padding-bottom: 40px;
 
   @media (max-width: 576px) {
     padding-top: 100px;
+    padding-bottom: 70px;
   }
 `;
 

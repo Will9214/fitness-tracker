@@ -83,17 +83,19 @@ const ShowWorkouts = () => {
 export default ShowWorkouts;
 
 const WorkoutScreen = styled.div`
-  padding: 0 10px;  
-  padding-top: 170px;
+  padding: 40px 10px;  
+  padding-top: 210px;
+
+
   
   @media (max-width: 576px) {
-    padding-top: 100px;
+    padding-top: 90px;
+    padding-bottom: 70px;
   }
 `;
 
 const WorkoutsContainer = styled.div`
   padding-bottom: 1px;
-  margin-bottom: 80px;
   box-shadow: 2px 2px 5px;
 `;
 
