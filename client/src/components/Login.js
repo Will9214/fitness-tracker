@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { Container, Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,8 @@ const userSchema = Yup.object().shape({
 const Login = () => {
 
   const { loading, user, error } = useSelector((state) => state.auth);
+  console.log(loading);
+  
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
@@ -69,32 +71,40 @@ const Login = () => {
 
         {renderSubmitError()}
 
-        <Form onSubmit={handleSubmit(handleFormSubmit)} className="col-md-4">
+        <>
+          {loading ? (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <Form onSubmit={handleSubmit(handleFormSubmit)} className="col-md-4">
 
-          <Form.Group className="mb-3" controlId="formGroupEmail">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Username" name="username" {...register("username", { required: true })} />
-            <div style={{ color: "red" }}>{errors.username?.message ? "*" + capitalizeFirstLetter(errors.username?.message) : null}</div>
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formGroupEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Username" name="username" {...register("username", { required: true })} />
+                <div style={{ color: "red" }}>{errors.username?.message ? "*" + capitalizeFirstLetter(errors.username?.message) : null}</div>
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGroupPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password" {...register("password", { required: true })} />
-            <div style={{ color: "red" }}>{errors.password?.message ? "*" + capitalizeFirstLetter(errors.password?.message) : null}</div>
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formGroupPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" name="password" {...register("password", { required: true })} />
+                <div style={{ color: "red" }}>{errors.password?.message ? "*" + capitalizeFirstLetter(errors.password?.message) : null}</div>
+              </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
+              <Form.Group as={Row} className="mb-3">
 
-            <Col>
-              <Button type="submit">Log In</Button>
-            </Col>
+                <Col>
+                  <Button type="submit">Log In</Button>
+                </Col>
 
-            <Col>
-              <Button onClick={handleSignUpClick}>Sign Up</Button>
-            </Col>
+                <Col>
+                  <Button onClick={handleSignUpClick}>Sign Up</Button>
+                </Col>
 
-          </Form.Group>
-        </Form>
+              </Form.Group>
+            </Form>
+          )}
+        </>
       </Container>
     </LoginContainer>
   )
