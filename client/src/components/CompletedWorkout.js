@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 
 const CompletedWorkout = ({ workout }) => {
+  const dateCompleted = new Date(workout.iat).toLocaleString("en-US");  
   
   const renderActivities = () => {
     if (workout.activities) {
@@ -36,6 +37,8 @@ const CompletedWorkout = ({ workout }) => {
       <div className="text-center display-6">
         <strong>{workout.name}</strong>
       </div>
+        <div className="text-center"><strong>{dateCompleted}</strong></div>
+        <hr className="m-1" />
       <Row>
         {renderActivities()}
       </Row>
