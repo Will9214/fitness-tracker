@@ -35,54 +35,35 @@ const Activity = () => {
     if (activity?.type.toLowerCase() === "strength") {
       return (
         <>
-          <Row> 
+          <Row className="text-center"> 
             <Col className="col-md-4">
-              <Row>
-                <Col className="col-md-auto">
                   <FieldTitle>Weight: </FieldTitle>
-                </Col>
-                <Col className="col-md-auto">
   
                   {isEditing ? (
                     <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.weight}</div>
                   )}          
-                    
-                </Col>
-              </Row>
             </Col>
+
             <Col className="col-md-4">
-              <Row>
-                <Col className="col-md-auto">
                   <FieldTitle>Sets: </FieldTitle>
-                </Col>
-                <Col className="col-md-4">
                   
                   {isEditing ? (
                     <input onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.sets}</div>
                   )}
-
-                </Col>
-              </Row>
             </Col>
+
             <Col className="col-md-4">
-              <Row>
-                <Col className="col-md-auto">
                   <FieldTitle>Reps: </FieldTitle>
-                </Col>
-                <Col className="col-md-auto">
                     
                   {isEditing ? (
                     <input onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.reps}</div>
                   )}
-
-                </Col>
-              </Row>
             </Col>
           </Row>
           <hr />

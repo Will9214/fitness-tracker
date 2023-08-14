@@ -64,10 +64,10 @@ const SearchBar = () => {
   const handleNameSubmit = e => {
     e.preventDefault();
 
-    setName(e.target[1].value);
+    setName(e.target[0].value);
     setOffset(0);
 
-    e.target[1].value = "";
+    e.target[0].value = "";
   };
 
   // setType value when a type has been selected/changed

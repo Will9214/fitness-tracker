@@ -35,7 +35,7 @@ const Home = () => {
               <HomeDescription>
                 <li>View your Completed Workouts below</li>
                 <li>Create Activities in the Activities tab</li>
-                <li>Create a Workout in the Workouts tab and add your desired activitiess</li>
+                <li>Create a Workout in the Workouts tab and add your desired activities</li>
                 <li>View your workout and update the activities within the workout in real time while at the gym or at the end of a run</li>
                 <li>Search for exercises in the Search tab and add them as activities</li>
               </HomeDescription>

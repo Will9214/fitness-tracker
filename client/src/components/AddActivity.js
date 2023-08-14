@@ -56,18 +56,18 @@ const AddActivity = () => {
       return (
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridWeight">
-            <Form.Label>Weight Lifted</Form.Label>
-            <Form.Control type="text" placeholder="Enter weight" name="weight" {...register("weight", { required: false })}/>
+            <Form.Label>Weight</Form.Label>
+            <Form.Control type="text" placeholder="Amt Lifted" name="weight" {...register("weight", { required: false })}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridSets">
             <Form.Label>Sets</Form.Label>
-            <Form.Control type="text" placeholder="Enter number of sets" name="sets" {...register("sets", { required: false })} />
+            <Form.Control type="text" placeholder="# of sets" name="sets" {...register("sets", { required: false })} />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridReps">
             <Form.Label>Reps</Form.Label>
-            <Form.Control type="text" placeholder="Enter number of reps" name="reps" {...register("reps", { required: false })}/>
+            <Form.Control type="text" placeholder="# of reps" name="reps" {...register("reps", { required: false })}/>
           </Form.Group>
         </Row>
       )
@@ -75,8 +75,8 @@ const AddActivity = () => {
       return (
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridDuration">
-            <Form.Label>Duration</Form.Label>
-            <Form.Control type="text" placeholder="Enter duration of activity" name="time" {...register("time", { required: false })}/>
+            <Form.Label>Time</Form.Label>
+            <Form.Control type="text" placeholder="Enter Time" name="time" {...register("time", { required: false })}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridDistance">
@@ -92,6 +92,22 @@ const AddActivity = () => {
 
   return(
     <AddActivityContainer className="container">
+      <AddActivityInstructions>
+        <li>Give your activity a name and description</li>
+        <li>There are two options to choose from for the type of activity, "Strength" or "Cardio"</li>
+        <li>Fill in the rest of the Activity Info once you've selected type</li>
+        <li>These values can be edited at any time</li>
+        <li>Activities will be added and/or combined in a workout</li>
+        <li>Example Activity: </li>
+          <div className="ps-5">
+            <div><strong>Name</strong> - Bicep Curls</div>
+            <div><strong>Type</strong> - Strength</div>
+            <div><strong>Description</strong> - With a dumbbell in each hand, allow them to hang straight down at your side. Flex at the elbow, keeping the upper arm still, and continue to the top of the movement, then slowly return the dumbbells to your side.</div>
+            <div><strong>Weight</strong> - 15</div>
+            <div><strong>Sets</strong> - 3</div>
+            <div><strong>Reps</strong> - 10</div>
+          </div>
+      </AddActivityInstructions>
       <FormContainer className="col-md-8 offset-md-2">
         <h3 className="text-center">Create an Activity</h3>
         <hr />
@@ -99,7 +115,7 @@ const AddActivity = () => {
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridActivityName">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter activity name" name="name" {...register("name", { required: true })} />
+              <Form.Control type="text" placeholder="Activity name" name="name" {...register("name", { required: true })} />
               {errors.name?.message}
             </Form.Group>
 
@@ -155,4 +171,16 @@ const AddActivityContainer = styled.div`
 const FormContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding: 20px;
+`;
+
+const AddActivityInstructions = styled.div`
+  margin-bottom: 20px;
+
+  @media (min-width: 576px) {
+    margin-left: 18%;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 11px;
+  }
 `;
