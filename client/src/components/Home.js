@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ import ShowCompletedWorkouts from "./ShowCompletedWorkouts";
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
   const userToken = localStorage.getItem("userToken");
-  const navigate = useNavigate();
+ 
   const dispatch = useDispatch();
 
   // fetches userActivities and userWorkouts
@@ -24,19 +24,22 @@ const Home = () => {
     }
   }, [userToken, dispatch] )
 
-  // navigates to search for exercise screen
-  const handleSearchClick = () => {
-    navigate("/search_exercise");
-  };
-
   return (
     <HomeContainer>
       <Container>
         <Row>
           <Col>
             <h1 className="display-3">
-              Welcome {user.username}! You are successfully logged in!!
+              Welcome, {user.username}!
             </h1>
+              <HomeDescription>
+                <li>View your Completed Workouts below</li>
+                <li>Create Activities in the Activities tab</li>
+                <li>Create a Workout in the Workouts tab and add your desired activitiess</li>
+                <li>View your workout and update the activities within the workout in real time while at the gym or at the end of a run</li>
+                <li>Search for exercises in the Search tab and add them as activities</li>
+              </HomeDescription>
+            
           </Col>
         </Row>
       </Container> 
@@ -56,4 +59,11 @@ const HomeContainer = styled.div`
   @media (max-width: 576px) {
     padding-top: 90px;
   }
+`;
+
+const HomeDescription = styled.div`
+
+@media (max-width: 576px) {
+  font-size: 11px;
+}
 `;

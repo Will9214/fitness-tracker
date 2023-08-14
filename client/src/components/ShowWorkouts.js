@@ -61,6 +61,11 @@ const ShowWorkouts = () => {
 
   return (
     <WorkoutScreen>
+      <WorkoutsDescription>
+        <li>Create a workout and add activities that you would like to be a part of that workout</li>
+        <li>Click on a workout to view it and its activities</li>
+        <li>Fill out the info for the activities within the workout and complete the workout to save it</li>
+      </WorkoutsDescription>
       <WorkoutsContainer className="col-sm-3 offset-sm-4">
         <div className="display-6 text-center">Workout List</div>
         <hr className="m-1" />
@@ -99,4 +104,16 @@ const WorkoutContainer = styled.div`
     background-color: #e0e0e0;
   }
   margin: 0 5px;
+`;
+
+const WorkoutsDescription = styled.div`
+  margin-bottom: 20px;
+
+  @media (min-width: 576px) {
+    margin-left: 33.33%;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 11px;
+  }
 `;

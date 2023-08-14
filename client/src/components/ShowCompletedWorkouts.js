@@ -29,9 +29,3 @@ const ShowCompletedWorkouts = () => {
 export default ShowCompletedWorkouts;
 
 const CompletedWorkoutsContainer = styled.div``;
-
-const WorkoutContainer = styled.div`
-  box-shadow: 2px 2px 5px;
-  padding-left: 20px;
-  margin: 5px;
-`;

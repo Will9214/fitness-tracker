@@ -58,7 +58,7 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
     ) : (
       <ResultsContainer className="container">
         <Row>
-        <Col md={11}>
+        <Col sm={11} xs={11}>
         <>
           <Name><strong>Name:</strong> {name}</Name>
           <Type><strong>Type:</strong> {type}</Type>
@@ -78,7 +78,7 @@ const Exercise = ({ id, name, type, muscle, equipment, difficulty, instructions 
         )}
         </>
         </Col>
-        <Col md={1}>
+        <Col sm={1} xs={1} className="p-0">
           <i id={id} onClick={handleAddExerciseClick} name={name} type={type} description={instructions} className="fa-regular fa-2x mt-2">&#xf0fe;</i>
         </Col>
         </Row>

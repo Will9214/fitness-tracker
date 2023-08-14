@@ -55,7 +55,7 @@ const WorkoutContainer = styled.div`
   margin: 10px;
 
   @media (max-width: 576px) {
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 

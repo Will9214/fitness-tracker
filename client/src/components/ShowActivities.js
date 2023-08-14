@@ -61,6 +61,10 @@ const ShowActivities = () => {
 
   return (
     <ActivitiesScreen>
+      <ActivitiesDescription>
+        <li>Add and view activities to your own activity list</li>
+        <li>Activities in your list will be available to add to your workouts</li>
+      </ActivitiesDescription>
       <ActivitiesContainer className="col-sm-3 offset-sm-4">
         <div className="display-6 text-center">Activity List</div>
         <hr className="m-1"/>
@@ -99,4 +103,16 @@ const ActivityContainer = styled.div`
     background-color: #e0e0e0;
   };
   margin: 0 5px;
+`;
+
+const ActivitiesDescription = styled.div`
+  margin-bottom: 20px;
+
+  @media (min-width: 576px) {
+    margin-left: 33.33%;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 11px;
+  }
 `;

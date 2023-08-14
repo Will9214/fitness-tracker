@@ -101,7 +101,7 @@ const SearchBar = () => {
   return (
     <Form className="row" onSubmit={handleNameSubmit}>
       <Form.Group className="col-md-11">
-        <Form.Label style={{ fontWeight: "700", fontSize: "1.5rem"}}>Search for Exercise and press Enter, Choose Exercise Type, and/or Choose Muscle.</Form.Label>
+        <FormLabel>Search for Exercise and press Enter, Choose Exercise Type, and/or Choose Muscle.</FormLabel>
         <Form.Label>If you find an exercise you like, click the plus symbol in the top, right corner of the individual results to add it to your Activity List.</Form.Label>
       </Form.Group>
       <Form.Group className="mb-1 col-md-6">
@@ -167,6 +167,15 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+const FormLabel = styled.div`
+  font-weight: 700;
+  font-size: 1.5rem;
+
+  @media (max-width: 576px) {
+    font-size: 1rem;
+  }
+`;
 
 const ClearSearch = styled.div`
   font-weight: 700;

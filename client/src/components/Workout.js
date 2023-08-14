@@ -51,10 +51,19 @@ const Workout = () => {
   if (loading === false) {
     return (
       <WorkoutScreen>      
+        <WorkoutInstructions>
+          <li>Add or Remove Activities from the Workout</li>
+          <li>Click through the activities and input your data in real time while at the gym</li>
+          <li>Click on the activity values to edit, then press enter or click out of the input to save</li>
+          <li>Click Complete Workout when you have finished the workout and completed all the activities</li>
+          <li>Completed Workouts will be logged and displayed on the Home Screen</li>
+          <li>This workout template will stay in your Workouts and be available to use again</li>
+        </WorkoutInstructions>
+
         <WorkoutContainer className="col-md-8 offset-md-2">
           <div className="display-6 text-center">{workout?.name}</div>
           <hr className="m-1" />
-  
+          
           <Container className="col-md-8 offset-md-2">
           
             <Accordion>
@@ -106,4 +115,17 @@ const WorkoutContainer = styled.div`
   box-shadow: 2px 2px 5px;
   padding-bottom: 1px;
   margin-bottom: 80px;
+`;
+
+const WorkoutInstructions = styled.div`
+  margin-left: 15px;
+  margin-bottom: 20px;
+
+  @media(min-width: 576px) {
+    margin-left: 20%
+  }
+
+  @media (max-width: 576px) {
+    font-size: 11px;
+  }
 `;

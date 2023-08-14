@@ -23,5 +23,8 @@ const SearchContainer = styled.div`
 
   @media (max-width: 576px) {
     padding-top: 90px;
+    font-size: 11px;
   }
+
+  
 `;

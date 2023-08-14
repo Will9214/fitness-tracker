@@ -18,8 +18,6 @@ const userSchema = Yup.object().shape({
 const Login = () => {
 
   const { loading, user, error } = useSelector((state) => state.auth);
-  console.log(loading);
-  
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(userSchema)
