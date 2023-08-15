@@ -120,7 +120,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
                 <div>Weight(lbs)</div>
 
                 {isEditingWeight ? (
-                  <input inputmode="numeric" name="weight" onChange={e => setEditedActivityWeight(e.target.value)} value={editedActivityWeight} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateWeight} autoFocus style={{ width: "50px" }}/>
+                  <input type="text" inputmode="numeric" name="weight" onChange={e => setEditedActivityWeight(e.target.value)} value={editedActivityWeight} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateWeight} autoFocus style={{ width: "50px" }}/>
                 ) : (
                   <div onClick={handleWeightClick}>{editedActivityWeight}</div>
                 )}
@@ -131,7 +131,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
 
                 <div>Sets</div>
                 {isEditingSets ? (
-                  <input inputmode="tel" name="sets" onChange={e => setEditedActivitySets(e.target.value)} value={editedActivitySets} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateSets} autoFocus style={{ width: "50px" }}/>
+                  <input type="text" inputmode="tel" name="sets" onChange={e => setEditedActivitySets(e.target.value)} value={editedActivitySets} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateSets} autoFocus style={{ width: "50px" }}/>
                 ) : (
                   <div onClick={handleSetsClick}>{editedActivitySets}</div>
                 )}
