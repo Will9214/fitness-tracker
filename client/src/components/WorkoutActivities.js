@@ -143,7 +143,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
                 <div>Reps</div>
 
                 {isEditingReps ? (
-                  <input name="reps" onChange={e => setEditedActivityReps(e.target.value)} value={editedActivityReps} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateReps} autoFocus style={{ width: "50px" }}/>
+                  <input inputmode="numeric" name="reps" onChange={e => setEditedActivityReps(e.target.value)} value={editedActivityReps} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateReps} autoFocus style={{ width: "50px" }}/>
                 ) : (
                   <div onClick={handleRepsClick}>{editedActivityReps}</div>
                 )}
