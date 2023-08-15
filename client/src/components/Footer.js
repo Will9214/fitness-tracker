@@ -46,11 +46,18 @@ const Footer = () => {
     }
   };
 
-  return (
-    <FooterContainer className="fixed-bottom">
-      {renderNavigation()}
-    </FooterContainer>
-  )
+  if (user) {
+    return (
+      <FooterContainer className="fixed-bottom">
+        {renderNavigation()}
+      </FooterContainer>
+    )
+  } else {
+    return (
+      <EmptyFooter className="fixed-bottom">
+      </EmptyFooter>
+    )
+  }
 };
 
 export default Footer;
@@ -79,4 +86,10 @@ const NavColumn = styled.div`
   &:hover {
     background-color: #768299;
   }
+`;
+
+const EmptyFooter = styled.div`
+  width: 100%;
+  height: 40px;
+  background: #282c34;
 `;
