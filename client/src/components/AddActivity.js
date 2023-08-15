@@ -14,10 +14,10 @@ const AddActivitySchema = Yup.object().shape({
   type: Yup.string().required(),
   description: Yup.string(),
   time: Yup.string(),
-  distance: Yup.number(),
-  weight: Yup.number(),
-  sets: Yup.number(),
-  reps: Yup.number(),
+  distance: Yup.string(),
+  weight: Yup.string(),
+  sets: Yup.string(),
+  reps: Yup.string(),
 });
 
 // Displays a form to create a new activity
@@ -57,17 +57,17 @@ const AddActivity = () => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridWeight">
             <Form.Label>Weight(lbs)</Form.Label>
-            <Form.Control type="text" placeholder="Amt Lifted" name="weight" {...register("weight", { required: false })}/>
+            <Form.Control inputMode="decimal" type="text" placeholder="Amt Lifted" name="weight" {...register("weight", { required: false })}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridSets">
             <Form.Label>Sets</Form.Label>
-            <Form.Control type="text" placeholder="# of sets" name="sets" {...register("sets", { required: false })} />
+            <Form.Control inputMode="decimal" type="text" placeholder="# of sets" name="sets" {...register("sets", { required: false })} />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridReps">
             <Form.Label>Reps</Form.Label>
-            <Form.Control type="text" placeholder="# of reps" name="reps" {...register("reps", { required: false })}/>
+            <Form.Control inputMode="decimal" type="text" placeholder="# of reps" name="reps" {...register("reps", { required: false })}/>
           </Form.Group>
         </Row>
       )
@@ -76,12 +76,12 @@ const AddActivity = () => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridDuration">
             <Form.Label>Time(min)</Form.Label>
-            <Form.Control type="text" placeholder="Enter Time" name="time" {...register("time", { required: false })}/>
+            <Form.Control inputMode="decimal" type="text" placeholder="Enter Time" name="time" {...register("time", { required: false })}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridDistance">
             <Form.Label>Distance(mi)</Form.Label>
-            <Form.Control type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
+            <Form.Control inputMode="decimal" type="text" placeholder="Enter distance" name="distance" {...register("distance", { required: false })} />
           </Form.Group>
         </Row>
       )

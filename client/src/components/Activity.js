@@ -40,7 +40,7 @@ const Activity = () => {
                   <FieldTitle>Weight(lbs): </FieldTitle>
   
                   {isEditing ? (
-                    <input onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
+                    <input inputMode="decimal" onChange={e => setEditedActivityWeight(e.target.value)} style={{ width: "50px" }} value={editedActivityWeight} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.weight}</div>
                   )}          
@@ -50,7 +50,7 @@ const Activity = () => {
                   <FieldTitle>Sets: </FieldTitle>
                   
                   {isEditing ? (
-                    <input onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
+                    <input inputMode="decimal" onChange={e => setEditedActivitySets(e.target.value)} style={{ width: "50px" }} value={editedActivitySets} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.sets}</div>
                   )}
@@ -60,7 +60,7 @@ const Activity = () => {
                   <FieldTitle>Reps: </FieldTitle>
                     
                   {isEditing ? (
-                    <input onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
+                    <input inputMode="decimal" onChange={e => setEditedActivityReps(e.target.value)} style={{ width: "50px" }} value={editedActivityReps} onFocus={handleFocus}/>
                   ) : (
                     <div>{activity?.reps}</div>
                   )}
@@ -77,7 +77,7 @@ const Activity = () => {
                   <FieldTitle>Distance(mi): </FieldTitle>
               
                   {isEditing ? (
-                    <input onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
+                    <input inputMode="decimal" onChange={e => setEditedActivityDistance(e.target.value)} style={{ width: "50px" }} value={editedActivityDistance} onFocus={handleFocus} />
                   ) : (
                     <div>{activity?.distance}</div>
                   )}
@@ -87,7 +87,7 @@ const Activity = () => {
                   <FieldTitle>Time(min): </FieldTitle>
 
                   {isEditing ? (
-                    <input onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
+                    <input inputMode="decimal" onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} style={{ width: "50px" }}/>
                   ) : (
                     <div>{activity?.time}</div>
                   )}
