@@ -7,7 +7,38 @@ export const workoutSlice = createSlice({
     workouts: [],
     completedWorkouts: [],
   },
-  reducers: {},
+  reducers: {
+    updateActivityWeightInWorkout: (state, action) => {
+      const workout = state.workouts.find((workout) => workout._id === action.payload.workoutId);
+      const activity = workout.activities.find((activity) => activity._id === action.payload.activityId);
+
+      activity.weight = action.payload.editedActivityWeight;
+    },
+    updateActivitySetsInWorkout: (state, action) => {
+      const workout = state.workouts.find((workout) => workout._id === action.payload.workoutId);
+      const activity = workout.activities.find((activity) => activity._id === action.payload.activityId);
+
+     activity.sets = action.payload.editedActivitySets;
+    },
+    updateActivityRepsInWorkout: (state, action) => {
+      const workout = state.workouts.find((workout) => workout._id === action.payload.workoutId);
+      const activity = workout.activities.find((activity) => activity._id === action.payload.activityId);
+
+     activity.reps = action.payload.editedActivityReps;
+    },
+    updateActivityDistanceInWorkout: (state, action) => {
+      const workout = state.workouts.find((workout) => workout._id === action.payload.workoutId);
+      const activity = workout.activities.find((activity) => activity._id === action.payload.activityId);
+
+     activity.distance = action.payload.editedActivityDistance;
+    },
+    updatedActivityTimeInWorkout: (state, action) => {
+      const workout = state.workouts.find((workout) => workout._id === action.payload.workoutId);
+      const activity = workout.activities.find((activity) => activity._id === action.payload.activityId);
+
+     activity.time = action.payload.editedActivityTime;
+    },
+  },
   extraReducers: async (builder) => {
     builder.addCase(addWorkoutThunk.pending, (state) => {
       state.loading = true;
@@ -105,5 +136,7 @@ export const workoutSlice = createSlice({
     });
   },
 });
+
+export const { updateActivityWeightInWorkout, updateActivitySetsInWorkout, updateActivityRepsInWorkout, updateActivityDistanceInWorkout, updatedActivityTimeInWorkout } = workoutSlice.actions;
 
 export default workoutSlice.reducer;

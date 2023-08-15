@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Accordion, Container, Table, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateActivity } from "../redux/activities/activityActions";
+import { updateActivityDistanceInWorkout, updateActivityRepsInWorkout, updateActivitySetsInWorkout, updateActivityWeightInWorkout, updatedActivityTimeInWorkout } from "../redux/workouts/workoutSlice";
 
 
 // renders the activities that are associated with the particular workout
@@ -22,6 +23,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
 
   const handleUpdateWeight = () => {
     dispatch(updateActivity({ activityId, editedActivityWeight }));
+    dispatch(updateActivityWeightInWorkout({ workoutId, activityId, editedActivityWeight }));
     setIsEditingWeight(false);
   };
     
@@ -33,6 +35,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
 
   const handleUpdateSets = () => {
     dispatch(updateActivity({ activityId, editedActivitySets }));
+    dispatch(updateActivitySetsInWorkout({ workoutId, activityId, editedActivitySets }));
     setIsEditingSets(false);
   };
 
@@ -44,6 +47,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
 
   const handleUpdateReps = () => {
     dispatch(updateActivity({ activityId, editedActivityReps }));
+    dispatch(updateActivityRepsInWorkout({ workoutId, activityId, editedActivityReps }));
     setIsEditingReps(false);
   };
       
@@ -55,6 +59,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
   
   const handleUpdateDistance = () => {
     dispatch(updateActivity({ activityId, editedActivityDistance }));
+    dispatch(updateActivityDistanceInWorkout({ workoutId, activityId, editedActivityDistance }));
     setIsEditingDistance(false);
   };   
       
@@ -66,6 +71,7 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
   
   const handleUpdateTime = () => {
     dispatch(updateActivity({ activityId, editedActivityTime }));
+    dispatch(updatedActivityTimeInWorkout({ workoutId, activityId, editedActivityTime }));
     setIsEditingTime(false);
   };
 
