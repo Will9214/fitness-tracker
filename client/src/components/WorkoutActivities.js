@@ -115,37 +115,43 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
           <Container>
             
             <Row className="text-center align-items-center">
-              <Col md={3}>
+              <Col sm={4}>
 
                 <div>Weight(lbs)</div>
 
                 {isEditingWeight ? (
                   <input inputMode="decimal" name="weight" onChange={e => setEditedActivityWeight(e.target.value)} value={editedActivityWeight} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateWeight} autoFocus style={{ width: "50px" }}/>
                 ) : (
-                  <div onClick={handleWeightClick}>{editedActivityWeight}</div>
+                  <div>
+                    <div className="col-sm-4 offset-sm-4" onClick={handleWeightClick}>{editedActivityWeight ? editedActivityWeight : "-"}</div>
+                  </div>
                 )}
 
               </Col>
 
-              <Col md={3}>
+              <Col sm={4}>
 
                 <div>Sets</div>
                 {isEditingSets ? (
                   <input inputMode="decimal" name="sets" onChange={e => setEditedActivitySets(e.target.value)} value={editedActivitySets} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateSets} autoFocus style={{ width: "50px" }}/>
                 ) : (
-                  <div onClick={handleSetsClick}>{editedActivitySets}</div>
+                  <div>
+                    <div className="col-sm-4 offset-sm-4" onClick={handleSetsClick}>{editedActivitySets ? editedActivitySets : "-"}</div>
+                  </div>
                 )}
               
               </Col>
 
-              <Col md={3}>
+              <Col sm={4}>
 
                 <div>Reps</div>
 
                 {isEditingReps ? (
                   <input inputMode="decimal" name="reps" onChange={e => setEditedActivityReps(e.target.value)} value={editedActivityReps} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateReps} autoFocus style={{ width: "50px" }}/>
                 ) : (
-                  <div onClick={handleRepsClick}>{editedActivityReps}</div>
+                  <div>
+                    <div className="col-sm-4 offset-sm-4" onClick={handleRepsClick}>{editedActivityReps ? editedActivityReps : "-"}</div>
+                  </div>
                 )}
 
               </Col>
@@ -155,24 +161,28 @@ const WorkoutActivities = ({ activityId, workoutId }) => {
           <Container>
             
               <Row className="text-center">
-                <Col md={4}>
+                <Col sm={6}>
                   <div>Distance(mi)</div>
 
                   {isEditingDistance ? (
                   <input inputMode="decimal" name="distance" onChange={e => setEditedActivityDistance(e.target.value)} value={editedActivityDistance} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateDistance} autoFocus style={{ width: "50px" }}/>
                 ) : (
-                  <div onClick={handleDistanceClick}>{editedActivityDistance}</div>
+                  <div>
+                    <div className="col-sm-4 offset-sm-4" onClick={handleDistanceClick}>{editedActivityDistance ? editedActivityDistance : "-"}</div>
+                  </div>
                 )}
             
                 </Col>
 
-                <Col md={4}>
+                <Col sm={6}>
                   <div>Time(min)</div>
 
                   {isEditingTime ? (
                   <input inputMode="decimal" name="time" onChange={e => setEditedActivityTime(e.target.value)} value={editedActivityTime} onFocus={handleFocus} onKeyUp={handleEnter} onBlur={handleUpdateTime} autoFocus style={{ width: "50px" }}/>
                 ) : (
-                  <div onClick={handleTimeClick}>{editedActivityTime}</div>
+                  <div>
+                    <div className="col-sm-4 offset-sm-4" onClick={handleTimeClick}>{editedActivityTime ? editedActivityTime : "-"}</div>
+                  </div>
                 )}
 
                 </Col>
