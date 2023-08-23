@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Form } from "react-bootstrap";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserActivities } from "../redux/activities/activityActions";
@@ -109,6 +109,7 @@ const Activity = () => {
     setEditedActivityWeight(activity?.weight);
     setEditedActivitySets(activity?.sets);
     setEditedActivityReps(activity?.reps);
+    setEditedActivityDescription(activity?.description);
   };
 
   // using useState to manage updating values of the activity properties
@@ -117,6 +118,7 @@ const Activity = () => {
   const [editedActivityWeight, setEditedActivityWeight] = useState(activity?.weight);
   const [editedActivitySets, setEditedActivitySets] = useState(activity?.sets);
   const [editedActivityReps, setEditedActivityReps] = useState(activity?.reps);
+  const [editedActivityDescription, setEditedActivityDescription] = useState(activity?.description);
 
   // value is highlighted when the input is clicked. allows easier editing for user
   const handleFocus = (e) => {
@@ -129,8 +131,8 @@ const Activity = () => {
 
   // dispatch updateActivity with the updated values when Save Changes button is clicked
   const handleEditedActivitySave = () => {
-    dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps}));
-    dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps }));
+    dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription}));
+    dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription }));
     
     setIsEditing(false);
   };
@@ -159,10 +161,24 @@ const Activity = () => {
               <FieldTitle>
                 Description:
               </FieldTitle>
-                  
-              <div className="text-break" style={{ paddingLeft: "30px"}}>
-                {activity?.description}
-              </div>      
+              {isEditing ? (
+                    <Form>
+                      <Form.Group className="mb-3">
+                        <Form.Control 
+                          as="textarea" 
+                          rows={3} 
+                          placeholder={editedActivityDescription ? editedActivityDescription : "Add description here"} 
+                          value={editedActivityDescription}
+                          onChange={e => setEditedActivityDescription(e.target.value)}
+                          autoFocus
+                          />
+                      </Form.Group>
+                    </Form>
+              ) : (
+                <div className="text-break" style={{ paddingLeft: "30px"}}>
+                  {activity?.description}
+                </div>      
+              )} 
             </Row>
 
             <hr/>

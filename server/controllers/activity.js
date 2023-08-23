@@ -36,16 +36,17 @@ const getUserActivities = async function(req, res, next) {
 };
 
 const updateActivity = async function(req, res, next) {
-  const { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps } = req.body;
+  const { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription } = req.body;
   
   const activity = await Activity.findByIdAndUpdate(activityId, {
     distance: editedActivityDistance,
     time: editedActivityTime,
     weight: editedActivityWeight,
     sets: editedActivitySets,
-    reps: editedActivityReps
+    reps: editedActivityReps,
+    description: editedActivityDescription
   });
-  activity.save();
+  await activity.save();
 
   res.status(200).send(activity);
 };

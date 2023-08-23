@@ -70,7 +70,7 @@ export const removeActivityThunk = createAsyncThunk(
 
 export const updateActivity = createAsyncThunk(
   "/api/updateActivity",
-  async ({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps }, { rejectWithValue }) => {
+  async ({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -80,7 +80,7 @@ export const updateActivity = createAsyncThunk(
       };
       const { data } = await axios.post(
         `${backendURL}/api/updateActivity`,
-        { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps },
+        { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription },
         config,
       );
       return data;
