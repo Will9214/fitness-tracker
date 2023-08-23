@@ -70,7 +70,7 @@ export const removeActivityThunk = createAsyncThunk(
 
 export const updateActivity = createAsyncThunk(
   "/api/updateActivity",
-  async ({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription }, { rejectWithValue }) => {
+  async ({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription, editedActivityName }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -78,12 +78,11 @@ export const updateActivity = createAsyncThunk(
           "Authorization": `Bearer ${localStorage.getItem("userToken")}`
         }
       };
-      const { data } = await axios.post(
+      await axios.post(
         `${backendURL}/api/updateActivity`,
-        { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription },
+        { activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription, editedActivityName },
         config,
       );
-      return data;
     } catch (error) {
       if (error.response.message) {
         return rejectWithValue(error.response.message)

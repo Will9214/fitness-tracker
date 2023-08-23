@@ -110,6 +110,7 @@ const Activity = () => {
     setEditedActivitySets(activity?.sets);
     setEditedActivityReps(activity?.reps);
     setEditedActivityDescription(activity?.description);
+    setEditedActivityName(activity?.name);
   };
 
   // using useState to manage updating values of the activity properties
@@ -119,6 +120,7 @@ const Activity = () => {
   const [editedActivitySets, setEditedActivitySets] = useState(activity?.sets);
   const [editedActivityReps, setEditedActivityReps] = useState(activity?.reps);
   const [editedActivityDescription, setEditedActivityDescription] = useState(activity?.description);
+  const [editedActivityName, setEditedActivityName] = useState(activity?.name);
 
   // value is highlighted when the input is clicked. allows easier editing for user
   const handleFocus = (e) => {
@@ -131,8 +133,8 @@ const Activity = () => {
 
   // dispatch updateActivity with the updated values when Save Changes button is clicked
   const handleEditedActivitySave = () => {
-    dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription}));
-    dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription }));
+    dispatch(updateActivityReducer({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription, editedActivityName }));
+    dispatch(updateActivity({ activityId, editedActivityDistance, editedActivityTime, editedActivityWeight, editedActivitySets, editedActivityReps, editedActivityDescription, editedActivityName }));
     
     setIsEditing(false);
   };
@@ -140,7 +142,18 @@ const Activity = () => {
   return(
     <ActivityScreen>
       <ActivityContainer className="col-md-8 offset-md-2">
-        <div className="display-6 text-center">{activity?.name}</div>
+        {isEditing ? (
+          <div className="col-sm-8 offset-sm-2 p-1">
+            <input 
+              className="text-center" 
+              placeholder={editedActivityName} 
+              value={editedActivityName} 
+              onChange={e => setEditedActivityName(e.target.value)}
+              style={{ fontSize: "calc(1.375rem + 1.5vw", fontWeight: "300", lineHeight: "1.2", width: "100%" }} />
+          </div>
+        ) : (
+          <div className="display-6 text-center">{activity?.name}</div>
+        )}
         <hr className="m-1"/>
 
           <Container className="col-md-8 offset-md-2">
@@ -162,18 +175,17 @@ const Activity = () => {
                 Description:
               </FieldTitle>
               {isEditing ? (
-                    <Form>
-                      <Form.Group className="mb-3">
-                        <Form.Control 
-                          as="textarea" 
-                          rows={3} 
-                          placeholder={editedActivityDescription ? editedActivityDescription : "Add description here"} 
-                          value={editedActivityDescription}
-                          onChange={e => setEditedActivityDescription(e.target.value)}
-                          autoFocus
-                          />
-                      </Form.Group>
-                    </Form>
+                <Form>
+                  <Form.Group className="mb-3">
+                    <Form.Control 
+                      as="textarea"  
+                      placeholder={editedActivityDescription ? editedActivityDescription : "Add description here"} 
+                      value={editedActivityDescription}
+                      onChange={e => setEditedActivityDescription(e.target.value)}
+                      autoFocus
+                    />
+                  </Form.Group>
+                </Form>
               ) : (
                 <div className="text-break" style={{ paddingLeft: "30px"}}>
                   {activity?.description}

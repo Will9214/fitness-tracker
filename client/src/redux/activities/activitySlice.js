@@ -18,6 +18,7 @@ export const activitySlice = createSlice({
       activity.sets = action.payload.editedActivitySets;
       activity.reps = action.payload.editedActivityReps;
       activity.description = action.payload.editedActivityDescription;
+      activity.name = action.payload.editedActivityName;
     }
   },
   extraReducers: async (builder) => {
