@@ -16,7 +16,7 @@ const ShowWorkouts = () => {
     if (workouts.length === 0) {
       dispatch(getUserWorkouts());
     }
-  })
+  }, [])
 
   // navigates to individual workout's screen when workout is clicked
   const handleWorkoutClick = (e) => {

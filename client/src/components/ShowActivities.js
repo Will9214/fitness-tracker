@@ -16,7 +16,7 @@ const ShowActivities = () => {
     if (activities.length === 0) {
       dispatch(getUserActivities());
     }
-  })
+  }, [])
 
   // navigates to the individual activity's screen when activity is clicked
   const handleActivityClick = (e) => {
