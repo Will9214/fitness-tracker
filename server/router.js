@@ -4,11 +4,15 @@ const Authentication = require("./controllers/authentication");
 const Activity = require("./controllers/activity");
 const Workout = require("./controllers/workout");
 const Objective = require("./controllers/objective");
+const Health = require("./controllers/health");
 
 const requireAuth = passport.authenticate("jwt", { session: false });
 const requireSignin = passport.authenticate("local", { session: false });
 
 module.exports = function(app) {
+  // health
+  app.get("/api/health", Health.getHealth)
+
   // auth
   app.post("/auth/signup", Authentication.signUp)
   app.post("/auth/signin", requireSignin, Authentication.signIn)
